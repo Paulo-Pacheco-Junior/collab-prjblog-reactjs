@@ -24,6 +24,7 @@ const tags = [
 
 export function Home() {
   const [posts, setPosts] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     async function handleGetPosts() {
@@ -47,7 +48,13 @@ export function Home() {
           </ul>
         </TagsBar>
         <main>
-          <Input type="text" placeholder="Buscar..." lightInput />
+          <Input
+            type="text"
+            placeholder="Buscar..."
+            lightInput
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <ul>
             {posts.map((post) => {
               return <NoteItem key={String(post.id)} post={post} />;

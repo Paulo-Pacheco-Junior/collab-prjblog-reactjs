@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -31,11 +30,4 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-`;
-
-export const RegisterBtn = styled(Link)`
-  text-align: center;
-  font-size: 2rem;
-  color: #ccc;
-  padding: 1rem 2rem;
 `;

@@ -25,8 +25,4 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-
-  input:nth-child(2) {
-    margin-bottom: 2rem;
-  }
 `;

@@ -1,20 +1,23 @@
-import { Container, Form, RegisterBtn } from "./styles";
+import { Container, Form } from "./styles";
 import { Button } from "../../components/Button";
 import { useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
+import { LinkBtn } from "../../components/LinkBtn";
 
 export function SignIn() {
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({});
   const [credencialToken, setCredencialToken] = useState("");
 
-  async function login() {
+  async function handleLogin() {
     const response = await api.post("/login", {
-      email: "theo@gmail.com",
-      password: "123456",
+      email,
+      password,
     });
     const { user, token } = await response.data;
 
@@ -32,17 +35,25 @@ export function SignIn() {
       <Container>
         <div>
           <h1>DevBlog Web</h1>
-          <p>Seu BLog de Desenvolvimento Web</p>
-
+          <p>Seu Blog de Desenvolvimento Web</p>
           <h2>Fazer Login</h2>
-
           <Form>
-            <Input type="email" placeholder="E-mail" />
-            <Input type="password" placeholder="Senha" />
+            <Input
+              type="email"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-            <Button onClick={login} type="button" title="Entrar" />
+            <Button onClick={handleLogin} type="button" title="Entrar" />
 
-            <RegisterBtn to="/register">Faça seu Cadastro</RegisterBtn>
+            <LinkBtn to="/register" title="Faça seu Cadastro" />
           </Form>
         </div>
       </Container>
