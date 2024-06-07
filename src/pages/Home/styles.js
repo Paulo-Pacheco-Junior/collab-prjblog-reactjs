@@ -9,20 +9,9 @@ export const Container = styled.div`
     padding: 6rem 11rem;
   }
 
-  input {
-    background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
-    color: ${({ theme }) => theme.COLORS.GRAY_200};
-    width: 100%;
-    font-size: 2rem;
-    padding: 1.5rem;
-    outline: none;
-    border: none;
-    border-radius: 0.8rem;
-    margin-bottom: 3rem;
-  }
-
   ul {
     flex: 1;
+    margin-top: 2.2rem;
     list-style: none;
     display: flex;
     flex-wrap: wrap;

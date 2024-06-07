@@ -1,3 +1,5 @@
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
 import { Container, Form } from "./styles";
 import { useNavigate } from "react-router-dom";
 // import api from "../../services/api";
@@ -30,13 +32,11 @@ export function SignUp() {
         <h2>Faça o seu Cadastro</h2>
 
         <Form>
-          <input type="text" placeholder="Nome" />
-          <input type="email" placeholder="E-mail" />
-          <input type="password" placeholder="Senha" />
+          <Input type="text" placeholder="Nome" />
+          <Input type="email" placeholder="E-mail" />
+          <Input type="password" placeholder="Senha" />
 
-          <button onClick={register} type="button">
-            Cadastrar
-          </button>
+          <Button onClick={register} type="button" title="Cadastrar" />
         </Form>
       </div>
     </Container>

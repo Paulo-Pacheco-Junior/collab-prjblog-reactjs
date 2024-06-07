@@ -3,6 +3,7 @@ import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
 import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
 
 const tags = [
   "ReactJs",
@@ -46,7 +47,7 @@ export function Home() {
           </ul>
         </TagsBar>
         <main>
-          <input type="email" placeholder="Buscar..." />
+          <Input type="text" placeholder="Buscar..." lightInput />
           <ul>
             {posts.map((post) => {
               return <NoteItem key={String(post.id)} post={post} />;

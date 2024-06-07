@@ -1,7 +1,9 @@
 import { Container, Form, RegisterBtn } from "./styles";
+import { Button } from "../../components/Button";
 import { useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../../components/Input";
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -35,12 +37,10 @@ export function SignIn() {
           <h2>Fazer Login</h2>
 
           <Form>
-            <input type="email" placeholder="E-mail" />
-            <input type="password" placeholder="Senha" />
+            <Input type="email" placeholder="E-mail" />
+            <Input type="password" placeholder="Senha" />
 
-            <button onClick={login} type="button">
-              Entrar
-            </button>
+            <Button onClick={login} type="button" title="Entrar" />
 
             <RegisterBtn to="/register">Faça seu Cadastro</RegisterBtn>
           </Form>

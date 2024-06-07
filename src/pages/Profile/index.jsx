@@ -1,5 +1,7 @@
 import { Container, Form } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
 export function Profile() {
   const navigate = useNavigate();
@@ -17,14 +19,16 @@ export function Profile() {
         <h2>Seu Perfil</h2>
 
         <Form>
-          <input type="text" placeholder="Nome" />
-          <input type="email" placeholder="E-mail" />
-          <input type="password" placeholder="Senha Antiga" />
-          <input type="password" placeholder="Senha Nova" />
+          <Input type="text" placeholder="Nome" />
+          <Input type="email" placeholder="E-mail" />
+          <Input type="password" placeholder="Senha Antiga" />
+          <Input type="password" placeholder="Senha Nova" />
 
-          <button type="button" onClick={handleUpdateData}>
-            Atualizar Dados
-          </button>
+          <Button
+            type="button"
+            title="Atualizar Dados"
+            onClick={handleUpdateData}
+          />
         </Form>
       </div>
     </Container>

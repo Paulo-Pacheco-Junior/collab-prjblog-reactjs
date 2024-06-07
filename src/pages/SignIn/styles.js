@@ -31,37 +31,6 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-
-  input {
-    background-color: ${({ theme }) => theme.COLORS.BG_GRAY_900};
-    color: ${({ theme }) => theme.COLORS.GRAY_200};
-    padding: 0.8rem;
-    outline: none;
-    border: none;
-    border-radius: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
-  button {
-    background-color: ${({ theme }) => theme.COLORS.BG_ORANGE};
-    font-size: 1.8rem;
-    font-weight: 700;
-    padding: 1.2rem 1.6rem;
-    outline: none;
-    border: none;
-    border-radius: 0.8rem;
-  }
-`;
-
-export const Button = styled.button`
-  background-color: ${({ theme }) => theme.COLORS.BG_ORANGE};
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding: 0.8rem 1.2rem;
-  outline: none;
-  border: none;
-  border-radius: 0.8rem;
-  margin: 1rem 0 1rem;
 `;
 
 export const RegisterBtn = styled(Link)`

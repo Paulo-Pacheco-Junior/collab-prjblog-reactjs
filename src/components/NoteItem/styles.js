@@ -4,7 +4,6 @@ export const Container = styled.li`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
   color: ${({ theme }) => theme.COLORS.GRAY_300};
   padding: 3rem;
-  margin-bottom: 4rem;
   width: 30rem;
   border-radius: 1rem;
   cursor: pointer;
