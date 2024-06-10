@@ -7,7 +7,7 @@ import { Profile } from "../pages/Profile";
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/login" element={<SignIn />} />
+      <Route path="/" element={<SignIn />} />
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/register" element={<SignUp />} />

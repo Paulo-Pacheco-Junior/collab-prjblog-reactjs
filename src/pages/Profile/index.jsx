@@ -1,27 +1,28 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { LinkBtn } from "../../components/LinkBtn";
 import api from "../../services/api";
+import { UserContext } from "../../contexts/UserContext";
 
 export function Profile() {
+  const { user } = useContext(UserContext);
+
   const navigate = useNavigate();
 
-  const [name, setName] = useState("fulano7");
-  const [email, setEmail] = useState("fulano7@email.com");
-  const [password, setPassword] = useState("123456");
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState("");
 
   async function handleUpdateData() {
-    const response = await api.put("/users/9", {
-      id: 9,
+    const response = await api.put("/users/:id", {
       name,
       email,
       password,
     });
     const data = response.data;
-    console.log(data);
 
     navigate("/home");
 

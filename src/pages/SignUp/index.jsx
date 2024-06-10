@@ -20,9 +20,8 @@ export function SignUp() {
       password,
     });
     const data = await response.data;
-    console.log(data);
 
-    navigate("/home");
+    navigate("/");
 
     return data;
   }
@@ -56,7 +55,7 @@ export function SignUp() {
           />
           <Button onClick={register} type="button" title="Cadastrar" />
 
-          <LinkBtn to="/login" title="Já possuo Cadastro" />
+          <LinkBtn to="/" title="Já possuo Cadastro" />
         </Form>
       </div>
     </Container>

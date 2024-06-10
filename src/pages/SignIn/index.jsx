@@ -1,17 +1,19 @@
 import { Container, Form } from "./styles";
 import { Button } from "../../components/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { LinkBtn } from "../../components/LinkBtn";
+import { UserContext } from "../../contexts/UserContext";
 
 export function SignIn() {
+  const { setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
   const [credencialToken, setCredencialToken] = useState("");
 
   async function handleLogin() {
@@ -23,7 +25,7 @@ export function SignIn() {
 
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    setUserData(user);
+    setUser(user);
     setCredencialToken(token);
     navigate("/home");
 
