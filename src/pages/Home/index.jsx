@@ -1,4 +1,4 @@
-import { Container, BlogContent, TagsBar } from "./styles";
+import { Container, BlogContent, TagsBar, NewPost } from "./styles";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
@@ -40,6 +40,7 @@ export function Home() {
     <Container>
       <Header />
       <BlogContent>
+        <NewPost to="new-post">+ Criar Post</NewPost>
         <TagsBar>
           <ul>
             {tags.map((tag, index) => {

@@ -24,13 +24,13 @@ export const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
-  button {
+  a, button {
     margin-top: 1rem;
     cursor: pointer;
     transition: filter 0.2s;
   }
 
-  button:hover {
+  a:hover, button:hover {
     filter: brightness(0.85);
   }
 `;

@@ -7,6 +7,13 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
   color: ${({ theme }) => theme.COLORS.GRAY_100};
   padding: 2rem 6rem 2.5rem;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
 `;
 
 export const Profile = styled(Link)`
@@ -34,4 +41,9 @@ export const Title = styled(Link)`
   &:hover {
     background-color: ${(props) => props.theme.COLORS.BG_GRAY_900};
   }
+`;
+
+export const Logout = styled(Link)`
+  font-size: 25px;
+  color: ${(props) => props.theme.COLORS.GRAY_100};
 `;

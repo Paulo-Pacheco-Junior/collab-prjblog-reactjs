@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -21,6 +22,7 @@ export const Container = styled.div`
 
 export const BlogContent = styled.div`
   display: flex;
+  position: relative;
 `;
 
 export const TagsBar = styled.aside`
@@ -34,4 +36,19 @@ export const TagsBar = styled.aside`
     display: flex;
     flex-direction: column;
   }
+`;
+
+export const NewPost = styled(Link)`
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  text-decoration: none;
+  background-color: ${({ theme }) => theme.COLORS.BG_ORANGE};
+  color: black;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 1.2rem 1.6rem;
+  outline: none;
+  border: none;
+  border-radius: 0.8rem;
 `;

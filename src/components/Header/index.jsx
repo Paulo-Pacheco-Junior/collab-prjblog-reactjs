@@ -1,8 +1,8 @@
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useContext } from "react";
-import { Container, Profile, Title } from "./styles";
+import { Container, Profile, Title, Logout } from "./styles";
 import { UserContext } from "../../contexts/UserContext";
 import api from "../../services/api";
-import { Link } from "react-router-dom";
 
 export function Header() {
   const { user, setUser } = useContext(UserContext);
@@ -15,13 +15,15 @@ export function Header() {
   return (
     <Container>
       <Title to="/">Collab DevBlog App</Title>
-      <Link to="/" onClick={handleLogout}>
-        Logout
-      </Link>
-      <Profile to="/profile">
-        <span>Bem Vindo,</span>
-        <span>{user.name}</span>
-      </Profile>
+      <div>
+        <Profile to="/profile">
+          <span>Bem Vindo,</span>
+          <span>{user.name}</span>
+        </Profile>
+        <Logout to="/" onClick={handleLogout}>
+          <RiLogoutCircleRLine />
+        </Logout>
+      </div>
     </Container>
   );
 }
