@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Container = styled.li`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
   color: ${({ theme }) => theme.COLORS.GRAY_300};
-  padding: 1rem 2rem;
+  padding: 0.1rem 1.6rem 1.4rem;
   width: 30rem;
   border-radius: 1rem;
 
@@ -12,6 +12,10 @@ export const Container = styled.li`
     margin-top: 1rem;
     text-align: right;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
+  }
+
+  footer p {
+    margin-bottom: 1rem;
   }
 `;
 

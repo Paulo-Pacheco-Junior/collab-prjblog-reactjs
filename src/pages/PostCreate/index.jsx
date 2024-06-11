@@ -4,6 +4,7 @@ import { Container, Form, Textarea, Tag } from "./styles";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { LinkBtn } from "../../components/LinkBtn";
+import api from "../../services/api";
 
 export function PostCreate() {
   const navigate = useNavigate();
@@ -12,8 +13,19 @@ export function PostCreate() {
   const [textContent, setTextContent] = useState("");
   const [tag, setTag] = useState("");
 
-  function handleCreatePost(e) {
+  async function handleCreatePost(e) {
     e.preventDefault();
+    const response = await api.post("/posts", {
+      user_id: 13,
+      title,
+      content: textContent,
+      tag_name: tag,
+    });
+    console.log(response);
+
+    const data = await response.data;
+    console.log(data);
+
     navigate("/home");
   }
 
