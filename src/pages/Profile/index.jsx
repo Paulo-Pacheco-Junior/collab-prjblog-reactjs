@@ -16,7 +16,8 @@ export function Profile() {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
 
-  async function handleUpdateData() {
+  async function handleUpdateData(e) {
+    e.preventDefault();
     const response = await api.put("/users/:id", {
       name,
       email,
@@ -36,7 +37,7 @@ export function Profile() {
         <p>Seu Blog de Desenvolvimento Web</p>
 
         <h2>Seu Perfil</h2>
-        <Form>
+        <Form onSubmit={handleUpdateData}>
           <Input
             type="text"
             placeholder="Nome"
@@ -56,11 +57,7 @@ export function Profile() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button
-            type="button"
-            title="Atualizar Dados"
-            onClick={handleUpdateData}
-          />
+          <Button type="submit" title="Atualizar Dados" />
 
           <LinkBtn to="/home" title="voltar" />
         </Form>

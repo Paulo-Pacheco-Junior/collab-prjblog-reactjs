@@ -16,7 +16,8 @@ export function SignIn() {
   const [password, setPassword] = useState("");
   const [credencialToken, setCredencialToken] = useState("");
 
-  async function handleLogin() {
+  async function handleLogin(e) {
+    e.preventDefault();
     const response = await api.post("/login", {
       email,
       password,
@@ -39,7 +40,7 @@ export function SignIn() {
           <h1>DevBlog Web</h1>
           <p>Seu Blog de Desenvolvimento Web</p>
           <h2>Fazer Login</h2>
-          <Form>
+          <Form onSubmit={handleLogin}>
             <Input
               type="email"
               placeholder="E-mail"
@@ -53,7 +54,7 @@ export function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button onClick={handleLogin} type="button" title="Entrar" />
+            <Button type="submit" title="Entrar" />
 
             <LinkBtn to="/register" title="Faça seu Cadastro" />
           </Form>

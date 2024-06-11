@@ -13,7 +13,8 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function register() {
+  async function handleRegister(e) {
+    e.preventDefault();
     const response = await api.post("/users", {
       name,
       email,
@@ -34,7 +35,7 @@ export function SignUp() {
 
         <h2>Faça o seu Cadastro</h2>
 
-        <Form>
+        <Form onSubmit={handleRegister}>
           <Input
             type="text"
             placeholder="Nome"
@@ -53,7 +54,7 @@ export function SignUp() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button onClick={register} type="button" title="Cadastrar" />
+          <Button type="submit" title="Cadastrar" />
 
           <LinkBtn to="/" title="Já possuo Cadastro" />
         </Form>
