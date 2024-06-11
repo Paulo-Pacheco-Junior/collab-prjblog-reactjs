@@ -4,7 +4,7 @@ import { Container, Title } from "./styles";
 export function NoteItem({ post }) {
   return (
     <Container>
-      <Title to="/post/1">{post.title}</Title>
+      <Title to={`/post/${post.id}`}>{post.title}</Title>
       <p>{post.content}</p>
       <footer>
         <p>{post.user.name}</p>

@@ -14,7 +14,7 @@ export function AppRoutes() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/new-post" element={<PostCreate />} />
-      <Route path="/post/1" element={<PostView />} />
+      <Route path="/post/:postId" element={<PostView />} />
     </Routes>
   );
 }
