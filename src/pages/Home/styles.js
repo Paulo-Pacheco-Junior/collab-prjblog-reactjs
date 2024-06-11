@@ -38,7 +38,7 @@ export const TagsBar = styled.aside`
   }
 `;
 
-export const NewPost = styled(Link)`
+export const NewPostBtn = styled(Link)`
   position: fixed;
   bottom: 30px;
   right: 40px;
