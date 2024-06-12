@@ -28,7 +28,7 @@ export function Home() {
 
   useEffect(() => {
     async function handleGetPosts() {
-      const response = await api.get("/posts?page=2");
+      const response = await api.get("/posts?page=1");
       const { data } = response.data;
 
       setPosts(data);
