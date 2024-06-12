@@ -1,4 +1,13 @@
-import { Container, BlogContent, TagsBar, NewPostBtn } from "./styles";
+import {
+  Container,
+  BlogContent,
+  TagsBar,
+  NewPostBtn,
+  Paginate,
+  PageIcon,
+  PaginateContainer,
+} from "./styles";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
@@ -9,17 +18,23 @@ export function Home() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
 
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState();
+
   useEffect(() => {
     async function handleGetPosts() {
-      const response = await api.get("/posts?page=1");
-      const { data } = response.data;
+      const response = await api.get(`/posts?page=${page}`);
+      const { data, current_page, last_page } = response.data;
 
       setPosts(data);
+
+      setPage(current_page);
+      setPages(last_page);
 
       return data;
     }
     handleGetPosts();
-  }, []);
+  }, [page, pages]);
 
   return (
     <Container>
@@ -55,6 +70,26 @@ export function Home() {
           </ul>
         </main>
       </BlogContent>
+      <PaginateContainer>
+        <div className="pages">
+          Página {page} de {pages}
+        </div>
+        <Paginate>
+          <PageIcon
+            onClick={() => setPage((page) => page - 1)}
+            disabled={page <= 1}
+          >
+            <MdNavigateBefore size={20} />
+          </PageIcon>
+          <PageIcon>{page}</PageIcon>
+          <PageIcon
+            onClick={() => setPage((page) => page + 1)}
+            disabled={page === pages}
+          >
+            <MdNavigateNext size={20} />
+          </PageIcon>
+        </Paginate>
+      </PaginateContainer>
     </Container>
   );
 }
