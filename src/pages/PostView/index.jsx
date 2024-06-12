@@ -1,4 +1,4 @@
-import { Container, Post } from "./styles";
+import { Container, Post, Scroll } from "./styles";
 import { LinkBtn } from "../../components/LinkBtn";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -12,11 +12,12 @@ export function PostView() {
   useEffect(() => {
     async function getPost() {
       const response = await api.get(`/posts/${postId}`);
-      const data = response.data;
-      setPost(data);
+      const { post } = response.data;
+
+      setPost(post);
     }
     getPost();
-  }, []);
+  }, [postId]);
 
   return (
     <Container>
@@ -24,7 +25,9 @@ export function PostView() {
         <LinkBtn to="/home" title="Voltar" />
         <Post>
           <h1>{post.title}</h1>
-          <p>{post.content}</p>
+          <Scroll>
+            <p>{post.content}</p>
+          </Scroll>
           <footer>
             <span>{post.user?.name}</span>
           </footer>

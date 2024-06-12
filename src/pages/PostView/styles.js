@@ -10,20 +10,29 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_900};
   color: ${({ theme }) => theme.COLORS.GRAY_300};
   padding: 1rem 2rem;
-  border-radius: 1rem;
 
   > div {
-    width: 50%;
+    transform: translateY(-2rem);
+    height: 35rem;
+    width: 70rem;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    justify-content: center;
+    /* background-color: blue; */
+    border-radius: 1rem;
   }
 `;
 
 export const Post = styled.div`
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
-  padding: 2rem 3rem;
+  padding: 0.6rem 1.6rem 1.2rem;
   border-radius: 10px;
 
   h1 {
@@ -35,5 +44,14 @@ export const Post = styled.div`
     margin-top: 1rem;
     text-align: right;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
+  }
+`;
+
+export const Scroll = styled.div`
+  flex: 1;
+  overflow-y: auto;
+
+  p {
+    display: scroll;
   }
 `;
