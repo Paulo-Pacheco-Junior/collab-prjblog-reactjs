@@ -12,17 +12,20 @@ export function Profile() {
 
   const navigate = useNavigate();
 
+  const userId = 13;
+
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
 
   async function handleUpdateData(e) {
     e.preventDefault();
-    const response = await api.put("/users/:id", {
+    const response = await api.put(`/users/${userId}`, {
       name,
       email,
       password,
     });
+    console.log(response);
     const data = response.data;
 
     navigate("/home");

@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   main {
+    flex: 1;
     height: 100vh;
     padding: 6rem 11rem;
   }
@@ -23,18 +25,38 @@ export const Container = styled.div`
 export const BlogContent = styled.div`
   display: flex;
   position: relative;
+  padding-bottom: 12rem;
 `;
 
 export const TagsBar = styled.aside`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+
   color: ${({ theme }) => theme.COLORS.GRAY_100};
-  width: 28rem;
-  text-align: center;
-  padding: 5rem 0 2rem 3.5rem;
-  cursor: pointer;
+  width: 22rem;
+  padding: 1rem 0 1rem 6rem;
 
   ul {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  li {
+    background-color: #8234e9;
+    background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    text-align: center;
+    width: 10rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
 `;
 

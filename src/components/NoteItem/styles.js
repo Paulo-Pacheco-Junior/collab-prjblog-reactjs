@@ -14,7 +14,8 @@ export const Container = styled.li`
 
   > p {
     flex: 1;
-    overflow-y: hidden;
+    overflow: hidden;
+    word-wrap: break-word;
   }
 
   footer {

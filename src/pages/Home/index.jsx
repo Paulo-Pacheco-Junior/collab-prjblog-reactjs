@@ -5,23 +5,6 @@ import { NoteItem } from "../../components/NoteItem";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 
-const tags = [
-  "ReactJs",
-  "Laravel",
-  "Web",
-  "Front End",
-  "Back End",
-  "Full Stack",
-  "Collab",
-  "PHP",
-  "JavaScript",
-  "Raspberry",
-  "Server",
-  "Deploy",
-  "Integration",
-  "API Restful",
-];
-
 export function Home() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
@@ -45,8 +28,15 @@ export function Home() {
         <NewPostBtn to="/new-post">+ Criar Post</NewPostBtn>
         <TagsBar>
           <ul>
-            {tags.map((tag, index) => {
-              return <li key={String(index)}>{tag}</li>;
+            {posts.map((post) => {
+              if (post.tags.length === 0) {
+                return null;
+              }
+              return (
+                <li key={String(post.id)}>
+                  {post.tags[0]?.name ? <div>{post.tags[0].name}</div> : null}
+                </li>
+              );
             })}
           </ul>
         </TagsBar>
