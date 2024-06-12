@@ -19,8 +19,13 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* background-color: blue; */
     border-radius: 1rem;
+  }
+
+  .buttons-div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 `;
 

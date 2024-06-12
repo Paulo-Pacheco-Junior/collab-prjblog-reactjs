@@ -9,6 +9,11 @@ export function PostView() {
 
   const [post, setPost] = useState({});
 
+  async function handleDeletePost() {
+    const response = await api.delete(`posts/${postId}`);
+    console.log("post apagado", response);
+  }
+
   useEffect(() => {
     async function getPost() {
       const response = await api.get(`/posts/${postId}`);
@@ -22,7 +27,10 @@ export function PostView() {
   return (
     <Container>
       <div>
-        <LinkBtn to="/home" title="Voltar" />
+        <div className="buttons-div">
+          <LinkBtn to="/home" title="Voltar" />
+          <LinkBtn to="/home" onClick={handleDeletePost} title="Apagar Post" />
+        </div>
         <Post>
           <h1>{post.title}</h1>
           <Scroll>
