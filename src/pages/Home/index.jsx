@@ -1,25 +1,31 @@
-import {
-  Container,
-  BlogContent,
-  TagsBar,
-  NewPostBtn,
-  Paginate,
-  PageIcon,
-  PaginateContainer,
-} from "./styles";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { Container, BlogContent, TagsBar, NewPostBtn } from "./styles";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { Paginate } from "../../components/Paginate";
 
 export function Home() {
   const [posts, setPosts] = useState([]);
+  const [tags, setTags] = useState([]);
+
   const [search, setSearch] = useState("");
 
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState();
+
+  async function handleFilterTags(tagId) {
+    if (tagId === "all") {
+      const response = await api.get(`/posts?page=${page}`);
+      const { data } = response.data;
+      return setPosts(data);
+    }
+
+    const filteredTags = tags.filter((tag) => tag.id === tagId);
+
+    setPosts(filteredTags);
+  }
 
   useEffect(() => {
     async function handleGetPosts() {
@@ -27,6 +33,7 @@ export function Home() {
       const { data, current_page, last_page } = response.data;
 
       setPosts(data);
+      setTags(data);
 
       setPage(current_page);
       setPages(last_page);
@@ -43,13 +50,17 @@ export function Home() {
         <NewPostBtn to="/new-post">+ Criar Post</NewPostBtn>
         <TagsBar>
           <ul>
-            {posts.map((post) => {
-              if (post.tags.length === 0) {
+            <li onClick={() => handleFilterTags("all")}>{"TODOS"}</li>
+            {tags.map((tag) => {
+              if (tag.tags.length === 0) {
                 return null;
               }
               return (
-                <li key={String(post.id)}>
-                  {post.tags[0]?.name ? <div>{post.tags[0].name}</div> : null}
+                <li
+                  key={String(tag.id)}
+                  onClick={() => handleFilterTags(tag.id)}
+                >
+                  {tag.tags[0]?.name ? <div>{tag.tags[0].name}</div> : null}
                 </li>
               );
             })}
@@ -70,26 +81,7 @@ export function Home() {
           </ul>
         </main>
       </BlogContent>
-      <PaginateContainer>
-        <div className="pages">
-          Página {page} de {pages}
-        </div>
-        <Paginate>
-          <PageIcon
-            onClick={() => setPage((page) => page - 1)}
-            disabled={page <= 1}
-          >
-            <MdNavigateBefore size={20} />
-          </PageIcon>
-          <PageIcon>{page}</PageIcon>
-          <PageIcon
-            onClick={() => setPage((page) => page + 1)}
-            disabled={page === pages}
-          >
-            <MdNavigateNext size={20} />
-          </PageIcon>
-        </Paginate>
-      </PaginateContainer>
+      <Paginate page={page} pages={pages} setPage={setPage} />
     </Container>
   );
 }
