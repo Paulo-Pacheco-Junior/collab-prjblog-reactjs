@@ -14,7 +14,6 @@ export function SignIn() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [credencialToken, setCredencialToken] = useState("");
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -25,16 +24,12 @@ export function SignIn() {
     const { user, token } = await response.data;
 
     localStorage.setItem("@user", JSON.stringify(user));
+    localStorage.setItem("@token", JSON.stringify(token));
 
-    localStorage.setItem(
-      "@token",
-      JSON.stringify(
-        (api.defaults.headers.common["Authorization"] = `Bearer ${token}`)
-      )
-    );
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     setUser(user);
-    setCredencialToken(token);
+
     navigate("/home");
 
     return user;

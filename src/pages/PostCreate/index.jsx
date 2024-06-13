@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Textarea, Tag } from "./styles";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { LinkBtn } from "../../components/LinkBtn";
 import api from "../../services/api";
+import { UserContext } from "../../contexts/UserContext";
 
 export function PostCreate() {
+  const { user } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -16,7 +19,7 @@ export function PostCreate() {
   async function handleCreatePost(e) {
     e.preventDefault();
     const response = await api.post("/posts", {
-      user_id: 13,
+      user_id: user.id,
       title,
       content: textContent,
       tag_name: tag,

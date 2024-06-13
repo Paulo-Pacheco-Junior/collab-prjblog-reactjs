@@ -25,6 +25,8 @@ export function Profile() {
     });
     const data = response.data;
 
+    localStorage.setItem("@user", JSON.stringify(data));
+
     setUser(data);
 
     navigate("/home");
