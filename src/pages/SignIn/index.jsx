@@ -24,7 +24,14 @@ export function SignIn() {
     });
     const { user, token } = await response.data;
 
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    localStorage.setItem("@user", JSON.stringify(user));
+
+    localStorage.setItem(
+      "@token",
+      JSON.stringify(
+        (api.defaults.headers.common["Authorization"] = `Bearer ${token}`)
+      )
+    );
 
     setUser(user);
     setCredencialToken(token);

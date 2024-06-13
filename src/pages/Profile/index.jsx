@@ -8,11 +8,9 @@ import api from "../../services/api";
 import { UserContext } from "../../contexts/UserContext";
 
 export function Profile() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
-
-  const userId = 13;
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -20,13 +18,14 @@ export function Profile() {
 
   async function handleUpdateData(e) {
     e.preventDefault();
-    const response = await api.put(`/users/${userId}`, {
+    const response = await api.put(`/users/${user.id}`, {
       name,
       email,
       password,
     });
-    console.log(response);
     const data = response.data;
+
+    setUser(data);
 
     navigate("/home");
 
