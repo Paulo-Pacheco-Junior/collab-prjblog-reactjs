@@ -6,6 +6,16 @@
 
 ### Até o momento não está Responsivo e a Autenticação está incompleta. Porém já foram desenvolvidas muitas coisas interessantes.
 
+<ul>
+  <li>Cadastrar Novo Usuário</li>
+  <li>Logar e Deslogar</li>
+  <li>Atualizar Perfil do Usuário</li>
+  <li>Criar, Visualizar e Apagar Post</li>
+  <li>Criar Tag em Post ao criar Post</li>
+  <li>Filtrar posts por Tags</li>
+  <li>Navegar entre as páginas (Cada página exibe 6 Posts)</li>
+</ul>
+
 ### Faça o Git Clone e faça o teste...
 
 ![DevBLog](https://github.com/Paulo-Pacheco-Junior/collab-prjblog-reactjs/assets/78752003/5a560701-9883-4198-8731-07f8ceedff17)
