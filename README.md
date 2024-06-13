@@ -11,6 +11,7 @@
   <li>Logar e Deslogar</li>
   <li>Atualizar Perfil do Usuário</li>
   <li>Criar, Visualizar e Apagar Post</li>
+  <li>Visualizar Post Completo ao clicar em cima</li>
   <li>Criar Tag em Post ao criar Post</li>
   <li>Filtrar posts por Tags</li>
   <li>Navegar entre as páginas (Cada página exibe 6 Posts)</li>
