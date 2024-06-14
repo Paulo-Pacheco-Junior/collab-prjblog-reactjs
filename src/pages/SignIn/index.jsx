@@ -1,7 +1,7 @@
 import { Container, Form } from "./styles";
 import { Button } from "../../components/Button";
 import { useContext, useState } from "react";
-// import api from "../../services/api";
+import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { LinkBtn } from "../../components/LinkBtn";
@@ -15,25 +15,25 @@ export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // async function handleLogin(e) {
-  //   e.preventDefault();
-  //   const response = await api.post("/login", {
-  //     email,
-  //     password,
-  //   });
-  //   const { user, token } = await response.data;
+  async function handleLogin(e) {
+    e.preventDefault();
+    const response = await api.post("/login", {
+      email,
+      password,
+    });
+    const { user, token } = await response.data;
 
-  //   localStorage.setItem("@user", JSON.stringify(user));
-  //   localStorage.setItem("@token", JSON.stringify(token));
+    localStorage.setItem("@user", JSON.stringify(user));
+    localStorage.setItem("@token", JSON.stringify(token));
 
-  //   api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-  //   setUser(user);
+    setUser(user);
 
-  //   navigate("/home");
+    navigate("/home");
 
-  //   return user;
-  // }
+    return user;
+  }
 
   return (
     <div className="centered">
@@ -42,8 +42,7 @@ export function SignIn() {
           <h1>DevBlog Web</h1>
           <p>Seu Blog de Desenvolvimento Web</p>
           <h2>Fazer Login</h2>
-          {/* <Form onSubmit={handleLogin}> */}
-          <Form>
+          <Form onSubmit={handleLogin}>
             <Input
               type="email"
               placeholder="E-mail"
