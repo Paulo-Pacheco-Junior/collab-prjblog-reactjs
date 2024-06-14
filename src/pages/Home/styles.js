@@ -9,23 +9,25 @@ export const Container = styled.div`
 
   main {
     flex: 1;
-    align-items: center;
+    display: flex;
     justify-content: center;
-    padding: 1rem 10rem;
+    align-items: center;
+    padding: 1rem 14rem;
   }
 
   ul {
     flex: 1;
-    margin-top: 2.2rem;
-    list-style: none;
+    margin-top: 1.2rem;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+    list-style: none;
     gap: 4rem;
   }
 
   @media (max-width: 768px) {
     main {
-      padding: 1rem 1.4rem;
+      padding: 0 1.4rem;
     }
   }
 `;
@@ -33,7 +35,15 @@ export const Container = styled.div`
 export const BlogContent = styled.div`
   display: flex;
   position: relative;
+  padding-top: 1.6rem;
   padding-bottom: 12rem;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const TagsBar = styled.aside`
@@ -69,6 +79,7 @@ export const TagsBar = styled.aside`
 `;
 
 export const NewPostBtn = styled(Link)`
+  display: block;
   position: fixed;
   bottom: 30px;
   right: 40px;
@@ -81,4 +92,12 @@ export const NewPostBtn = styled(Link)`
   outline: none;
   border: none;
   border-radius: 0.8rem;
+
+  @media (max-width: 768px) {
+    position: static;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    margin-left: 2.4rem;
+    margin-bottom: 1.6rem;
+  }
 `;

@@ -9,9 +9,8 @@ export const Container = styled.li`
   color: ${({ theme }) => theme.COLORS.GRAY_300};
   padding: 0.1rem 1.6rem 1.4rem;
   height: 18rem;
-  width: 28rem;
+  width: 30rem;
   border-radius: 1rem;
-  margin: auto;
 
   > p {
     flex: 1;

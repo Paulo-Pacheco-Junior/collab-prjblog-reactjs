@@ -12,14 +12,15 @@ export function Paginate({ page, pages, setPage }) {
           onClick={() => setPage((page) => page - 1)}
           disabled={page <= 1}
         >
-          <MdNavigateBefore size={20} />
+          <MdNavigateBefore size={15} />
         </PageIcon>
         <PageIcon>{page}</PageIcon>
         <PageIcon
+          className="pagination-icon"
           onClick={() => setPage((page) => page + 1)}
           disabled={page === pages}
         >
-          <MdNavigateNext size={20} />
+          <MdNavigateNext size={15} />
         </PageIcon>
       </div>
     </Container>
