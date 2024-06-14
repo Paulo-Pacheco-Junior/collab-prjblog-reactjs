@@ -26,8 +26,8 @@ export const GlobalStyle = createGlobalStyle`
 
   a, button {
     margin-top: 1rem;
-    cursor: pointer;
     transition: filter 0.2s;
+    cursor: pointer;
   }
 
   a:hover, button:hover {

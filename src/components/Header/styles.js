@@ -3,43 +3,52 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
   color: ${({ theme }) => theme.COLORS.GRAY_100};
-  padding: 2rem 6rem 2.5rem;
+  padding: 1.4rem 4rem;
+  margin-bottom: 2.2rem;
 
-  > div {
+  > nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.4rem 2.6rem;
+    margin-bottom: 1rem;
   }
 `;
 
 export const Profile = styled(Link)`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
   background-color: ${(props) => props.theme.COLORS.BG_GRAY_700};
   color: ${(props) => props.theme.COLORS.GRAY_100};
   text-decoration: none;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
 
   &:hover {
-    background-color: ${(props) => props.theme.COLORS.BG_GRAY_900};
+    filter: brightness(1);
+    transition: 0.2s;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
   }
 `;
 
-export const Title = styled(Link)`
-  background-color: ${(props) => props.theme.COLORS.BG_GRAY_700};
-  color: ${(props) => props.theme.COLORS.GRAY_100};
-  font-size: 3rem;
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
+export const Title = styled.h1`
+  font-size: 4.2rem;
+  margin: 0.6rem auto;
 
-  &:hover {
-    background-color: ${(props) => props.theme.COLORS.BG_GRAY_900};
+  @media (max-width: 768px) {
+    font-size: 3.4rem;
+    margin: 1.6rem auto 2.4rem;
   }
 `;
 

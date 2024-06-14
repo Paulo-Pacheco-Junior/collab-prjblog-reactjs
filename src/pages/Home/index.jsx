@@ -3,14 +3,13 @@ import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
 import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
+// import { Input } from "../../components/Input";
 import { Paginate } from "../../components/Paginate";
 
 export function Home() {
   const [posts, setPosts] = useState([]);
   const [tags, setTags] = useState([]);
-
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState();
@@ -48,7 +47,7 @@ export function Home() {
       <Header />
       <BlogContent>
         <NewPostBtn to="/new-post">+ Criar Post</NewPostBtn>
-        <TagsBar>
+        {/* <TagsBar>
           <ul>
             <li onClick={() => handleFilterTags("all")}>{"TODOS"}</li>
             {tags.map((tag) => {
@@ -65,15 +64,15 @@ export function Home() {
               );
             })}
           </ul>
-        </TagsBar>
+        </TagsBar> */}
         <main>
-          <Input
+          {/* <Input
             type="text"
             placeholder="Buscar..."
             lightInput
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-          />
+          /> */}
           <ul>
             {posts.map((post) => {
               return <NoteItem key={String(post.id)} post={post} />;

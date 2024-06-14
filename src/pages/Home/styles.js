@@ -4,12 +4,14 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 
   main {
     flex: 1;
-    height: 100vh;
-    padding: 6rem 11rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 10rem;
   }
 
   ul {
@@ -18,7 +20,13 @@ export const Container = styled.div`
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5rem;
+    gap: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem 1.4rem;
+    }
   }
 `;
 

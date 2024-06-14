@@ -9,8 +9,9 @@ export const Container = styled.li`
   color: ${({ theme }) => theme.COLORS.GRAY_300};
   padding: 0.1rem 1.6rem 1.4rem;
   height: 18rem;
-  width: 30rem;
+  width: 28rem;
   border-radius: 1rem;
+  margin: auto;
 
   > p {
     flex: 1;
@@ -28,6 +29,10 @@ export const Container = styled.li`
 
   footer p {
     margin-bottom: 0.6rem;
+  }
+
+  @media (min-width: 768px) {
+    width: 34rem;
   }
 `;
 

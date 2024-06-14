@@ -1,3 +1,4 @@
+import { RiUserReceivedLine } from "react-icons/ri";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useContext } from "react";
 import { Container, Profile, Title, Logout } from "./styles";
@@ -14,16 +15,16 @@ export function Header() {
 
   return (
     <Container>
-      <Title to="/">Collab DevBlog App</Title>
-      <div>
+      <Title>DevBlog App</Title>
+      <nav>
         <Profile to="/profile">
-          <span>Bem Vindo,</span>
+          <RiUserReceivedLine size={20} />
           <span>{user.name}</span>
         </Profile>
         <Logout to="/" onClick={handleLogout}>
           <RiLogoutCircleRLine />
         </Logout>
-      </div>
+      </nav>
     </Container>
   );
 }
