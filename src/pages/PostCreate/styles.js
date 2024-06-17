@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: grid;
   place-content: center;
   height: 100vh;
+  margin: auto;
 
   .wrapper {
     margin: auto;
@@ -15,6 +16,11 @@ export const Container = styled.div`
     padding: 4rem 4rem 7rem;
     margin: 1rem auto 0;
     border-radius: 0.5rem;
+
+    @media (max-width: 768px) {
+      width: 36rem;
+      padding: 2rem;
+    }
 
     h1 {
       margin-bottom: 0.8rem;
