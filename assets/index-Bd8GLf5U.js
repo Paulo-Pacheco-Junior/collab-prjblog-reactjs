@@ -421,7 +421,7 @@ Error generating stack: `+i.message+`
     border-radius: 0.5rem;
 
     @media (max-width: 768px) {
-      width: 52rem;
+      width: 36rem;
       padding: 2rem;
     }
 
