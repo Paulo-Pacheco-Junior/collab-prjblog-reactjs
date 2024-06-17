@@ -22,7 +22,17 @@ export const Container = styled.header`
   }
 `;
 
-export const Profile = styled(Link)`
+export const Title = styled.h1`
+  font-size: 4.2rem;
+  margin: 0.6rem auto;
+
+  @media (max-width: 768px) {
+    font-size: 3.4rem;
+    margin: 1.6rem auto 2.4rem;
+  }
+`;
+
+export const NavBtn = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -40,19 +50,4 @@ export const Profile = styled(Link)`
   @media (max-width: 768px) {
     font-size: 1.3rem;
   }
-`;
-
-export const Title = styled.h1`
-  font-size: 4.2rem;
-  margin: 0.6rem auto;
-
-  @media (max-width: 768px) {
-    font-size: 3.4rem;
-    margin: 1.6rem auto 2.4rem;
-  }
-`;
-
-export const Logout = styled(Link)`
-  font-size: 25px;
-  color: ${(props) => props.theme.COLORS.GRAY_100};
 `;
