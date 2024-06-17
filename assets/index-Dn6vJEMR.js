@@ -407,6 +407,7 @@ Error generating stack: `+i.message+`
   display: grid;
   place-content: center;
   height: 100vh;
+  margin: auto;
 
   .wrapper {
     margin: auto;
@@ -418,6 +419,11 @@ Error generating stack: `+i.message+`
     padding: 4rem 4rem 7rem;
     margin: 1rem auto 0;
     border-radius: 0.5rem;
+
+    @media (max-width: 768px) {
+      width: 52rem;
+      padding: 2rem;
+    }
 
     h1 {
       margin-bottom: 0.8rem;
