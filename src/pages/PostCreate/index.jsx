@@ -34,29 +34,32 @@ export function PostCreate() {
 
   return (
     <Container>
-      <LinkBtn to="/home" title="Voltar" />
-      <div>
-        <Form onSubmit={handleCreatePost}>
-          <Input
-            type="text"
-            placeholder="Seu título ..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <Textarea
-            placeholder="O que você está pensando? ..."
-            value={textContent}
-            onChange={(e) => setTextContent(e.target.value)}
-          />
-          <Tag
-            type="text"
-            placeholder="#hashtag ..."
-            value={tag}
-            onChange={(e) => setTag(e.target.value)}
-          />
-          <Button type="submit" title="Criar Post" />
-        </Form>
+      <div className="wrapper">
+        <LinkBtn to="/home" title="Voltar" />
+
+        <div className="form-container">
+          <Form onSubmit={handleCreatePost}>
+            <Input
+              type="text"
+              placeholder="Seu título ..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <Textarea
+              placeholder="O que você está pensando? ..."
+              value={textContent}
+              onChange={(e) => setTextContent(e.target.value)}
+            />
+            <Tag
+              type="text"
+              placeholder="#hashtag ..."
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+            />
+            <Button type="submit" title="Criar Post" />
+          </Form>
+        </div>
       </div>
     </Container>
   );

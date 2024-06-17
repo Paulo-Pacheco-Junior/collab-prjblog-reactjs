@@ -5,11 +5,15 @@ export const Container = styled.div`
   place-content: center;
   height: 100vh;
 
-  > div {
+  .wrapper {
+    margin: auto;
+  }
+
+  .form-container {
     background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
     width: 52rem;
     padding: 4rem 4rem 7rem;
-    margin: 0 auto;
+    margin: 1rem auto 0;
     border-radius: 0.5rem;
 
     h1 {
@@ -19,6 +23,13 @@ export const Container = styled.div`
     h2 {
       margin: 3rem 0 2rem;
     }
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
 `;
 
