@@ -20,6 +20,11 @@ export const Container = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     border-radius: 1rem;
+
+    @media (max-width: 768px) {
+      min-width: 30rem;
+      width: 100%;
+    }
   }
 
   .buttons-div {
