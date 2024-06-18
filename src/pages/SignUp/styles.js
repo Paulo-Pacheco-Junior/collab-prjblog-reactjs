@@ -26,3 +26,10 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
+
+export const ErrorMsg = styled.div`
+  color: #ed8285;
+  background-color: #513036;
+  padding: 0 1.4rem;
+  margin: 0.6rem 0 1rem;
+`;

@@ -1,29 +1,58 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form } from "./styles";
+import { Container, Form, ErrorMsg } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { LinkBtn } from "../../components/LinkBtn";
 import api from "../../services/api";
 import { UserContext } from "../../contexts/UserContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export function Profile() {
   const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState("");
+  let schema = yup.object({
+    name: yup
+      .string()
+      .required("o campo nome é obrigatório")
+      .min(2, "o nome deve ter no mínimo 2 caracteres")
+      .max(20, "o nome deve ter no máximo 20 caracteres"),
+    email: yup
+      .string()
+      .required("o campo e-mail é obrigatório")
+      .email("e-mail inválido"),
 
-  async function handleUpdateData(e) {
-    e.preventDefault();
+    password: yup
+      .string()
+      .required("o campo senha é obrigatório")
+      .min(6, "a senha deve ter no mínimo 6 caracteres"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+    },
+
+    resolver: yupResolver(schema),
+  });
+
+  async function handleUpdateData({ name, email, password }) {
     const response = await api.put(`/users/${user.id}`, {
       name,
       email,
       password,
     });
-    const data = response.data;
+
+    const data = await response.data;
 
     localStorage.setItem("@user", JSON.stringify(data));
 
@@ -41,27 +70,25 @@ export function Profile() {
         <p>Seu Blog de Desenvolvimento Web</p>
 
         <h2>Seu Perfil</h2>
-        <Form onSubmit={handleUpdateData}>
-          <Input
-            type="text"
-            placeholder="Nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <Form onSubmit={handleSubmit(handleUpdateData)}>
+          <Input type="text" placeholder="Nome" {...register("name")} />
+          <ErrorMsg>{errors.name && errors.name?.message}</ErrorMsg>
+
+          <Input type="email" placeholder="E-mail" {...register("email")} />
+          <ErrorMsg>{errors.email && errors.email?.message}</ErrorMsg>
+
           <Input
             type="password"
             placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            {...register("password")}
           />
+          <ErrorMsg>{errors.password && errors.password?.message}</ErrorMsg>
 
-          <Button type="submit" title="Atualizar Dados" />
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            title={isSubmitting ? "Carregando..." : "Atualizar Dados"}
+          />
 
           <LinkBtn to="/home" title="voltar" />
         </Form>

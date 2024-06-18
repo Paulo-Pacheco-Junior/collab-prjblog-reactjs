@@ -1,23 +1,46 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Textarea, Tag } from "./styles";
+import { Container, Form, Textarea, Tag, ErrorMsg } from "./styles";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { LinkBtn } from "../../components/LinkBtn";
 import api from "../../services/api";
 import { UserContext } from "../../contexts/UserContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export function PostCreate() {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const [title, setTitle] = useState("");
-  const [textContent, setTextContent] = useState("");
-  const [tag, setTag] = useState("");
+  let schema = yup.object({
+    title: yup
+      .string()
+      .required("o campo título é obrigatório")
+      .min(3, "o título deve ter no mínimo 3 caracteres")
+      .max(100, "o título deve ter no máximo 100 caracteres"),
 
-  async function handleCreatePost(e) {
-    e.preventDefault();
+    textContent: yup
+      .string()
+      .required("o campo conteúdo é obrigatório")
+      .min(30, "o conteúdo deve ter no mínimo 30 caracteres")
+      .max(1200, "o conteúdo deve ter no máximo 1.200 caracteres"),
+    tag: yup
+      .string()
+      .required("o campo tag é obrigatório")
+      .min(2, "a tag deve ter no mínimo 2 caracteres")
+      .max(15, "a tag deve ter no máximo 15 caracteres"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  async function handleCreatePost({ title, textContent, tag }) {
     const response = await api.post("/posts", {
       user_id: user.id,
       title,
@@ -38,26 +61,30 @@ export function PostCreate() {
         <LinkBtn to="/home" title="Voltar" />
 
         <div className="form-container">
-          <Form onSubmit={handleCreatePost}>
+          <Form onSubmit={handleSubmit(handleCreatePost)}>
             <Input
               type="text"
               placeholder="Seu título ..."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
+              {...register("title")}
             />
+            <ErrorMsg>{errors.title && errors.title?.message}</ErrorMsg>
+
             <Textarea
               placeholder="O que você está pensando? ..."
-              value={textContent}
-              onChange={(e) => setTextContent(e.target.value)}
+              {...register("textContent")}
             />
-            <Tag
-              type="text"
-              placeholder="#hashtag ..."
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
+            <ErrorMsg>
+              {errors.textContent && errors.textContent?.message}
+            </ErrorMsg>
+
+            <Tag type="text" placeholder="#hashtag ..." {...register("tag")} />
+            <ErrorMsg>{errors.tag && errors.tag?.message}</ErrorMsg>
+
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              title={isSubmitting ? "Carregando..." : "Criar Post"}
             />
-            <Button type="submit" title="Criar Post" />
           </Form>
         </div>
       </div>

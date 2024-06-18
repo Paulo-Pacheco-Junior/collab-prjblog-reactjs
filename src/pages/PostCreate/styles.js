@@ -52,7 +52,6 @@ export const Textarea = styled.textarea`
   border: none;
   resize: none;
   border-radius: 10px;
-  margin-bottom: 2rem;
 `;
 
 export const Tag = styled.input`
@@ -65,5 +64,11 @@ export const Tag = styled.input`
   outline: none;
   border: none;
   border-radius: 0.8rem;
-  margin-bottom: 1rem;
+`;
+
+export const ErrorMsg = styled.div`
+  color: #ed8285;
+  background-color: #513036;
+  padding: 0 1.4rem;
+  margin: 0.6rem 0 1rem;
 `;

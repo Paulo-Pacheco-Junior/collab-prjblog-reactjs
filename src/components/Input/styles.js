@@ -10,5 +10,4 @@ export const Container = styled.input`
   outline: none;
   border: none;
   border-radius: 0.8rem;
-  margin-bottom: 1rem;
 `;

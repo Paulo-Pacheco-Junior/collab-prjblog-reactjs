@@ -1,25 +1,46 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form } from "./styles";
+import { Container, Form, ErrorMsg } from "./styles";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import api from "../../services/api";
 import { LinkBtn } from "../../components/LinkBtn";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export function SignUp() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  let schema = yup.object({
+    name: yup
+      .string()
+      .required("o campo nome é obrigatório")
+      .min(2, "o nome deve ter no mínimo 2 caracteres")
+      .max(20, "o nome deve ter no máximo 20 caracteres"),
+    email: yup
+      .string()
+      .required("o campo e-mail é obrigatório")
+      .email("e-mail inválido"),
 
-  async function handleRegister(e) {
-    e.preventDefault();
+    password: yup
+      .string()
+      .required("o campo senha é obrigatório")
+      .min(6, "a senha deve ter no mínimo 6 caracteres"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitted },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  async function handleRegister({ name, email, password }) {
     const response = await api.post("/users", {
       name,
       email,
       password,
     });
+
     const data = await response.data;
 
     navigate("/");
@@ -35,26 +56,28 @@ export function SignUp() {
 
         <h2>Faça o seu Cadastro</h2>
 
-        <Form onSubmit={handleRegister}>
-          <Input
-            type="text"
-            placeholder="Nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <Form onSubmit={handleSubmit(handleRegister)}>
+          <Input type="text" placeholder="Nome" {...register("name")} />
+          <ErrorMsg>{errors.name && errors.name?.message}</ErrorMsg>
+
+          <Input type="email" placeholder="E-mail" {...register("email")} />
+          <ErrorMsg>{errors.email && errors.email?.message}</ErrorMsg>
+
           <Input
             type="password"
             placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            {...register("password")}
           />
-          <Button type="submit" title="Cadastrar" />
+          <ErrorMsg>{errors.password && errors.password?.message}</ErrorMsg>
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            title={isSubmitting ? "Carregando..." : "Cadastrar"}
+          />
+          <ErrorMsg>
+            {isSubmitted && "e-mail indisponível e/ou campos inválidos"}
+          </ErrorMsg>
 
           <LinkBtn to="/" title="Já possuo Cadastro" />
         </Form>
