@@ -606,6 +606,7 @@ attempted value: ${s}
 
   p {
     display: scroll;
+    word-wrap: break-word;
   }
 `;function pk(){var o;const{user:e}=A.useContext(ri);let{postId:t}=Xv();const[n,r]=A.useState({});async function i(){confirm("Tem certeza que deseja excluir?")&&await Bt.delete(`posts/${t}`)}return A.useEffect(()=>{async function s(){const l=await Bt.get(`/posts/${t}`),{post:u}=l.data;r(u)}s()},[t]),E.jsx(ck,{children:E.jsxs("div",{children:[E.jsxs("div",{className:"buttons-div",children:[E.jsx(Qr,{to:"/",title:"Voltar"}),e.id===n.user_id&&E.jsx(Qr,{to:"/",onClick:i,title:"Apagar Post"})]}),E.jsxs(fk,{children:[E.jsx("h1",{children:n.title}),E.jsx(dk,{children:E.jsx("p",{children:n.content})}),E.jsx("footer",{children:E.jsx("span",{children:(o=n.user)==null?void 0:o.name})})]})]})})}function hk(){return E.jsxs(p1,{children:[E.jsx(bn,{path:"/",element:E.jsx(tk,{})}),E.jsx(bn,{path:"/login",element:E.jsx(LE,{})}),E.jsx(bn,{path:"/profile",element:E.jsx(ik,{})}),E.jsx(bn,{path:"/register",element:E.jsx(bE,{})}),E.jsx(bn,{path:"/new-post",element:E.jsx(ak,{})}),E.jsx(bn,{path:"/post/:postId",element:E.jsx(pk,{})})]})}const mk=lS`
 
