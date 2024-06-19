@@ -389,10 +389,15 @@ attempted value: ${s}
   text-align: center;
   cursor: pointer;
 
+  &:disabled {
+    filter: brightness(0.8);
+    border: 0.5px solid #232129;
+  }
+
   @media (max-width: 768px) {
     font-size: 1rem;
   }
-`;function KE({page:e,pages:t,setPage:n}){return C.jsxs(qE,{children:[C.jsxs("div",{className:"pages-counter",children:["Página ",e," de ",t]}),C.jsxs("div",{className:"pages-container",children:[C.jsx(pu,{onClick:()=>n(r=>r-1),disabled:e<=1,children:C.jsx(YE,{size:15})}),C.jsx(pu,{children:e}),C.jsx(pu,{className:"pagination-icon",onClick:()=>n(r=>r+1),disabled:e===t,children:C.jsx(QE,{size:15})})]})]})}function JE(){const[e,t]=F.useState([]),[n,r]=F.useState([]),[i,o]=F.useState(1),[s,l]=F.useState();return F.useEffect(()=>{async function u(){const a=await Bt.get(`/posts?page=${i}`),{data:c,current_page:f,last_page:p}=a.data;return t(c),r(c),o(f),l(p),c}u()},[i,s]),C.jsxs(RE,{children:[C.jsx(GE,{}),C.jsxs(PE,{children:[C.jsx(TE,{to:"/new-post",children:"+ Criar Post"}),C.jsx("main",{children:C.jsx("ul",{children:e.map(u=>C.jsx(jE,{post:u},String(u.id)))})})]}),C.jsx(KE,{page:i,pages:s,setPage:o})]})}const ZE=J.div`
+`;function KE({page:e,pages:t,setPage:n}){return C.jsxs(qE,{children:[t>1&&C.jsxs("div",{className:"pages-counter",children:["Página ",e," de ",t]}),C.jsxs("div",{className:"pages-container",children:[C.jsx(pu,{onClick:()=>n(r=>r-1),disabled:e<=1,children:C.jsx(YE,{size:15})}),C.jsx(pu,{children:e}),C.jsx(pu,{className:"pagination-icon",onClick:()=>n(r=>r+1),disabled:e===t,children:C.jsx(QE,{size:15})})]})]})}function JE(){const[e,t]=F.useState([]),[n,r]=F.useState([]),[i,o]=F.useState(1),[s,l]=F.useState();return F.useEffect(()=>{async function u(){const a=await Bt.get(`/posts?page=${i}`),{data:c,current_page:f,last_page:p}=a.data;return t(c),r(c),o(f),l(p),c}u()},[i,s]),C.jsxs(RE,{children:[C.jsx(GE,{}),C.jsxs(PE,{children:[C.jsx(TE,{to:"/new-post",children:"+ Criar Post"}),C.jsx("main",{children:C.jsx("ul",{children:e.map(u=>C.jsx(jE,{post:u},String(u.id)))})})]}),C.jsx(KE,{page:i,pages:s,setPage:o})]})}const ZE=J.div`
   display: grid;
   place-content: center;
   height: 100vh;
