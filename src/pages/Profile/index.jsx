@@ -20,7 +20,7 @@ export function Profile() {
       .string()
       .required("o campo nome é obrigatório")
       .min(2, "o nome deve ter no mínimo 2 caracteres")
-      .max(20, "o nome deve ter no máximo 20 caracteres"),
+      .max(26, "o nome deve ter no máximo 26 caracteres"),
     email: yup
       .string()
       .required("o campo e-mail é obrigatório")
@@ -58,7 +58,7 @@ export function Profile() {
 
     setUser(data);
 
-    navigate("/home");
+    navigate("/");
 
     return data;
   }
@@ -90,7 +90,7 @@ export function Profile() {
             title={isSubmitting ? "Carregando..." : "Atualizar Dados"}
           />
 
-          <LinkBtn to="/home" title="voltar" />
+          <LinkBtn to="/" title="voltar" />
         </Form>
       </div>
     </Container>

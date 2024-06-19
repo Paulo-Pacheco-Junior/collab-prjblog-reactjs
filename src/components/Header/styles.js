@@ -39,7 +39,10 @@ export const NavBtn = styled(Link)`
   font-size: 1.4rem;
   background-color: ${(props) => props.theme.COLORS.BG_GRAY_700};
   color: ${(props) => props.theme.COLORS.GRAY_100};
-  text-decoration: none;
+
+  text-decoration-thickness: 12%;
+  text-decoration-color: #8234e9;
+  text-underline-offset: 3px;
 
   &:hover {
     filter: brightness(1);

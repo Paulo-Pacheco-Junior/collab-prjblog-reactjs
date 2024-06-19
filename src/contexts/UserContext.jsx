@@ -12,7 +12,7 @@ export function UserContextProvider({ children }) {
 
     api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
 
-    setUser(storedUser);
+    setUser(storedUser ? storedUser : { name: "Visitante" });
   }, []);
 
   return (

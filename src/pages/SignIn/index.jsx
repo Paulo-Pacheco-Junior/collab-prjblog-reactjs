@@ -1,5 +1,6 @@
 import api from "../../services/api";
-import { Container, Form, ErrorMsg } from "./styles";
+import { RiUserLine } from "react-icons/ri";
+import { Container, Form, NavBtn, ErrorMsg } from "./styles";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
@@ -48,7 +49,7 @@ export function SignIn() {
 
     setUser(user);
 
-    navigate("/home");
+    navigate("/");
 
     return user;
   }
@@ -63,14 +64,12 @@ export function SignIn() {
           <Form onSubmit={handleSubmit(handleLogin)}>
             <Input type="text" placeholder="E-mail" {...register("email")} />
             <ErrorMsg>{errors.email && errors.email?.message}</ErrorMsg>
-
             <Input
               type="password"
               placeholder="Senha"
               {...register("password")}
             />
             <ErrorMsg>{errors.password && errors.password?.message}</ErrorMsg>
-
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -79,6 +78,13 @@ export function SignIn() {
             <ErrorMsg>{isSubmitted && "usuário e/ou senha inválidos"}</ErrorMsg>
 
             <LinkBtn to="/register" title="Faça seu Cadastro" />
+
+            <hr />
+
+            <NavBtn to="/">
+              <RiUserLine size={20} />
+              <span>Entrar como Visitante</span>
+            </NavBtn>
           </Form>
         </div>
       </Container>

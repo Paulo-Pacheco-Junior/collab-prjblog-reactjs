@@ -9,8 +9,8 @@ import { PostView } from "../pages/PostView";
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<SignIn />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<SignIn />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/new-post" element={<PostCreate />} />

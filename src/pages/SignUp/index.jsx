@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Container, Form, ErrorMsg } from "./styles";
+import { RiUserLine } from "react-icons/ri";
+import { Container, Form, NavBtn, ErrorMsg } from "./styles";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import api from "../../services/api";
@@ -43,7 +44,7 @@ export function SignUp() {
 
     const data = await response.data;
 
-    navigate("/");
+    navigate("/login");
 
     return data;
   }
@@ -79,7 +80,14 @@ export function SignUp() {
             {isSubmitted && "e-mail indisponível e/ou campos inválidos"}
           </ErrorMsg>
 
-          <LinkBtn to="/" title="Já possuo Cadastro" />
+          <LinkBtn to="/login" title="Já possuo Cadastro" />
+
+          <hr />
+
+          <NavBtn to="/">
+            <RiUserLine size={20} />
+            <span>Entrar como Visitante</span>
+          </NavBtn>
         </Form>
       </div>
     </Container>

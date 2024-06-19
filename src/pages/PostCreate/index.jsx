@@ -37,7 +37,7 @@ export function PostCreate() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitted },
   } = useForm({ resolver: yupResolver(schema) });
 
   async function handleCreatePost({ title, textContent, tag }) {
@@ -52,13 +52,13 @@ export function PostCreate() {
     const data = await response.data;
     console.log(data);
 
-    navigate("/home");
+    navigate("/");
   }
 
   return (
     <Container>
       <div className="wrapper">
-        <LinkBtn to="/home" title="Voltar" />
+        <LinkBtn to="/" title="Voltar" />
 
         <div className="form-container">
           <Form onSubmit={handleSubmit(handleCreatePost)}>
@@ -85,6 +85,11 @@ export function PostCreate() {
               disabled={isSubmitting}
               title={isSubmitting ? "Carregando..." : "Criar Post"}
             />
+            {user.name === "Visitante" && (
+              <ErrorMsg>
+                {isSubmitted && "O usuário precisa estar logado"}
+              </ErrorMsg>
+            )}
           </Form>
         </div>
       </div>

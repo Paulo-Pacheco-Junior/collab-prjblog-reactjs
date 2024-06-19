@@ -13,8 +13,9 @@ export function PostView() {
   const [post, setPost] = useState({});
 
   async function handleDeletePost() {
-    const response = await api.delete(`posts/${postId}`);
-    console.log("post apagado", response);
+    if (confirm("Tem certeza que deseja excluir?")) {
+      await api.delete(`posts/${postId}`);
+    }
   }
 
   useEffect(() => {
@@ -31,13 +32,10 @@ export function PostView() {
     <Container>
       <div>
         <div className="buttons-div">
-          <LinkBtn to="/home" title="Voltar" />
+          <LinkBtn to="/" title="Voltar" />
+
           {user.id === post.user_id && (
-            <LinkBtn
-              to="/home"
-              onClick={handleDeletePost}
-              title="Apagar Post"
-            />
+            <LinkBtn to="/" onClick={handleDeletePost} title="Apagar Post" />
           )}
         </div>
         <Post>
