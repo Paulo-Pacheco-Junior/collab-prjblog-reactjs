@@ -46,6 +46,11 @@ export const PageIcon = styled.button`
   text-align: center;
   cursor: pointer;
 
+  &:disabled {
+    filter: brightness(0.8);
+    border: 0.5px solid #232129;
+  }
+
   @media (max-width: 768px) {
     font-size: 1rem;
   }
