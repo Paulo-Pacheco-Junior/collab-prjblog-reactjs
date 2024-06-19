@@ -63,5 +63,6 @@ export const Scroll = styled.div`
 
   p {
     display: scroll;
+    word-wrap: break-word;
   }
 `;
