@@ -30,7 +30,7 @@ export function PostCreate() {
     tag: yup
       .string()
       .required("o campo tag é obrigatório")
-      .min(2, "a tag deve ter no mínimo 2 caracteres")
+      .min(3, "a tag deve ter no mínimo 3 caracteres")
       .max(15, "a tag deve ter no máximo 15 caracteres"),
   });
 

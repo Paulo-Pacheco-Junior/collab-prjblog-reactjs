@@ -9,22 +9,24 @@ export function Paginate({ page, pages, setPage }) {
           Página {page} de {pages}
         </div>
       )}
-      <div className="pages-container">
-        <PageIcon
-          onClick={() => setPage((page) => page - 1)}
-          disabled={page <= 1}
-        >
-          <MdNavigateBefore size={15} />
-        </PageIcon>
-        <PageIcon>{page}</PageIcon>
-        <PageIcon
-          className="pagination-icon"
-          onClick={() => setPage((page) => page + 1)}
-          disabled={page === pages}
-        >
-          <MdNavigateNext size={15} />
-        </PageIcon>
-      </div>
+      {pages > 1 && (
+        <div className="pages-container">
+          <PageIcon
+            onClick={() => setPage((page) => page - 1)}
+            disabled={page <= 1}
+          >
+            <MdNavigateBefore size={15} />
+          </PageIcon>
+          <PageIcon>{page}</PageIcon>
+          <PageIcon
+            className="pagination-icon"
+            onClick={() => setPage((page) => page + 1)}
+            disabled={page === pages}
+          >
+            <MdNavigateNext size={15} />
+          </PageIcon>
+        </div>
+      )}
     </Container>
   );
 }
