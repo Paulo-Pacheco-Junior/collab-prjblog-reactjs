@@ -1,6 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { MdOutlineRemoveCircleOutline } from "react-icons/md";
+import { RiAddCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Textarea, Tag, ErrorMsg } from "./styles";
+import {
+  Container,
+  Form,
+  Textarea,
+  TagsContainer,
+  TagInputWithButton,
+  TagInput,
+  ErrorMsg,
+} from "./styles";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { LinkBtn } from "../../components/LinkBtn";
@@ -15,6 +25,9 @@ export function PostCreate() {
 
   const navigate = useNavigate();
 
+  const [newTag, setNewTag] = useState("");
+  const [tagsList, setTagsList] = useState("");
+
   let schema = yup.object({
     title: yup
       .string()
@@ -27,11 +40,12 @@ export function PostCreate() {
       .required("o campo conteúdo é obrigatório")
       .min(30, "o conteúdo deve ter no mínimo 30 caracteres")
       .max(1200, "o conteúdo deve ter no máximo 1.200 caracteres"),
-    tag: yup
-      .string()
-      .required("o campo tag é obrigatório")
-      .min(3, "a tag deve ter no mínimo 3 caracteres")
-      .max(15, "a tag deve ter no máximo 15 caracteres"),
+
+    // tags: yup
+    //   .string()
+    //   .required("o campo tag é obrigatório")
+    //   .min(3, "a tag deve ter no mínimo 3 caracteres")
+    //   .max(15, "a tag deve ter no máximo 15 caracteres"),
   });
 
   const {
@@ -40,28 +54,63 @@ export function PostCreate() {
     formState: { errors, isSubmitting, isSubmitted },
   } = useForm({ resolver: yupResolver(schema) });
 
-  async function handleCreatePost({ title, textContent, tag }) {
-    const response = await api.post("/posts", {
-      user_id: user.id,
-      title,
-      content: textContent,
-      tag_name: tag,
-    });
-    console.log(response);
+  function handleCreateTagButtonClick() {
+    if (tagsList.length < 3) {
+      if (newTag !== "" && newTag.trim() !== "" && newTag.length >= 3) {
+        setTagsList((tagsList) => [...tagsList, newTag]);
+        setNewTag("");
+      }
+    }
+  }
 
-    const data = await response.data;
-    console.log(data);
+  function handleCreateTagEnterPress(e) {
+    if (tagsList.length < 3) {
+      if (e.key === "Enter") {
+        e.preventDefault();
 
-    navigate("/");
+        if (newTag !== "" && newTag.trim() !== "" && newTag.length >= 3) {
+          setTagsList((tagsList) => [...tagsList, newTag]);
+          setNewTag("");
+        }
+      }
+    }
+  }
+
+  function handleDeleteTagButtonClick(tagIndex) {
+    const filteredTagsList = tagsList.filter(
+      (tags, index) => index !== tagIndex
+    );
+    setTagsList(filteredTagsList);
+  }
+
+  async function handleSubmitCreatePost({ title, textContent }) {
+    console.log("useForm req", title, textContent);
+    console.log("state req tagsList", tagsList);
+
+    if (tagsList.length > 0) {
+      const response = await api.post("/posts", {
+        user_id: user.id,
+        title,
+        content: textContent,
+        tags: tagsList,
+      });
+      console.log("response do submit", response);
+
+      const data = await response.data;
+
+      console.log("response data", data);
+
+      navigate("/");
+    }
   }
 
   return (
     <Container>
-      <div className="wrapper">
+      <div className="wrapper-form">
         <LinkBtn to="/" title="Voltar" />
 
         <div className="form-container">
-          <Form onSubmit={handleSubmit(handleCreatePost)}>
+          <Form onSubmit={handleSubmit(handleSubmitCreatePost)}>
             <Input
               type="text"
               placeholder="Seu título ..."
@@ -77,8 +126,46 @@ export function PostCreate() {
               {errors.textContent && errors.textContent?.message}
             </ErrorMsg>
 
-            <Tag type="text" placeholder="#hashtag ..." {...register("tag")} />
-            <ErrorMsg>{errors.tag && errors.tag?.message}</ErrorMsg>
+            <TagsContainer>
+              <TagInputWithButton>
+                <TagInput
+                  type="text"
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                  placeholder="#hashtag ..."
+                  onKeyDown={handleCreateTagEnterPress}
+                  maxLength={10}
+                />
+                <button type="button" onClick={handleCreateTagButtonClick}>
+                  <RiAddCircleLine size={20} />
+                </button>
+              </TagInputWithButton>
+
+              {tagsList.length > 0 &&
+                tagsList.map((tag, index) => {
+                  return (
+                    <TagInputWithButton key={index}>
+                      <TagInput type="text" value={tag} readOnly />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteTagButtonClick(index)}
+                      >
+                        <MdOutlineRemoveCircleOutline
+                          size={20}
+                          style={{
+                            color: "#DC2626",
+                          }}
+                        />
+                      </button>
+                    </TagInputWithButton>
+                  );
+                })}
+            </TagsContainer>
+            <ErrorMsg>
+              {isSubmitted &&
+                tagsList.length === 0 &&
+                "O campo tag é obrigatório"}
+            </ErrorMsg>
 
             <Button
               type="submit"

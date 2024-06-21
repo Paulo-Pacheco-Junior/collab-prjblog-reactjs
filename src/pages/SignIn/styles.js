@@ -52,8 +52,8 @@ export const NavBtn = styled(Link)`
   justify-content: center;
   gap: 0.5rem;
   font-size: 1.4rem;
-  background-color: ${(props) => props.theme.COLORS.BG_GRAY_700};
-  color: ${(props) => props.theme.COLORS.GRAY_100};
+  background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
+  color: ${({ theme }) => theme.COLORS.GRAY_100};
 
   text-decoration-thickness: 12%;
   text-decoration-color: #8234e9;

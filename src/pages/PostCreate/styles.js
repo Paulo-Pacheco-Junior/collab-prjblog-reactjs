@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100vh;
   margin: auto;
 
-  .wrapper {
+  .wrapper-form {
     margin: auto;
   }
 
@@ -54,16 +54,54 @@ export const Textarea = styled.textarea`
   border-radius: 10px;
 `;
 
-export const Tag = styled.input`
-  background-color: ${({ theme, $light }) =>
-    $light ? theme.COLORS.BG_GRAY_700 : theme.COLORS.BG_GRAY_900};
-  color: ${({ theme }) => theme.COLORS.GRAY_200};
+export const TagsContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem 0;
+`;
+
+export const TagInputWithButton = styled.div`
+  display: flex;
+  align-items: center;
   width: 50%;
-  padding: 0 1.4rem;
+
+  button {
+    color: #8234e9;
+    background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
+    outline: none;
+    border: none;
+    margin-left: 0.5rem;
+
+    &:hover {
+      filter: brightness(1); // reset do globalStyle
+    }
+  }
+`;
+
+export const TagInput = styled.input`
   height: 4.5rem;
+  width: 82%;
+  background-color: ${({ theme }) => theme.COLORS.BG_GRAY_900};
+  color: ${({ theme }) => theme.COLORS.GRAY_200};
+  padding: 0 1.4rem;
   outline: none;
   border: none;
+
   border-radius: 0.8rem;
+
+  &&:read-only {
+    background-color: rgba(35, 33, 41, 0.7);
+    color: ${({ theme }) => theme.COLORS.GRAY_300};
+
+    &&:focus {
+      border: none; // reset do globalStyle
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 76%;
+  }
 `;
 
 export const ErrorMsg = styled.div`

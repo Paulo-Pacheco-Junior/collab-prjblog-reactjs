@@ -8,7 +8,7 @@ export const Container = styled.li`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
   color: ${({ theme }) => theme.COLORS.GRAY_300};
   padding: 0.1rem 1.6rem 1.4rem;
-  height: 18rem;
+  height: 19rem;
   width: 30rem;
   border-radius: 1rem;
 
@@ -28,6 +28,7 @@ export const Container = styled.li`
 
   footer p {
     margin-bottom: 0.6rem;
+    font-size: 1.2rem;
   }
 
   @media (min-width: 768px) {
@@ -42,4 +43,10 @@ export const Title = styled(Link)`
   padding: 0.5rem 2rem 1rem 0;
   text-decoration: none;
   cursor: pointer;
+`;
+
+export const TagsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 `;

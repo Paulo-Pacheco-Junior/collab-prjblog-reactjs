@@ -29,12 +29,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a, button {
-    margin-top: 1rem;
     transition: filter 0.2s;
     cursor: pointer;
   }
 
   a:hover, button:hover {
     filter: brightness(0.85);
+  }
+
+  input:focus, textarea:focus {
+    border: 1px solid #8234e9;
   }
 `;
