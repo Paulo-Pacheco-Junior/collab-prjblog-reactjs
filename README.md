@@ -1,21 +1,56 @@
-### Front End desenvolvido em ReactJs em Collab com Back End desenvolvido em Laravel
+### Front End desenvolvido em ReactJs por mim e Back End desenvolvido em Laravel por https://github.com/fernando-fix
 
-### Back End: https://github.com/fernando-fix/collab-prjBlog
+#### Back End: https://github.com/fernando-fix/collab-prjBlog
 
-### EM DESENVOLVIMENTO...
+#### Em Desenvolvimento...
 
-### Até o momento não está Responsivo. Porém já foram desenvolvidas muitas coisas interessantes.
+<h2>Tecnologias e Ferramentas</h2>
+<ul>
+  <li>Context Api</li> 
+  <li>LocalStorage</li>
+  <li>Axios</li>
+  <li>React-hook-form</li>
+  <li>Yup</li>
+  <li>Styled Components</li>
+  <li>React-Icons</li>
+  <li>React-Router-Dom</li>
+</ul>
 
+<h2>Requisições</h2>
+<ul>
+  <li>Por Caminho da Requisição (path),</li>
+  <li>Por Corpo da Requisição (body),</li>
+  <li>Por Parâmetros de Rota (params),</li> 
+  <li>Por Parâmetros de Consulta (query)</li>
+</ul>
+
+<hr/>
+
+<h2>Permissões do Visitante</h2>
 <ul>
   <li>Cadastrar Novo Usuário</li>
-  <li>Logar e Deslogar</li>
+  <li>Entrar como Visitante</li>
+  <li>Visualizar Posts</li>
+  <li>Visualizar um Post Completo</li>
+</ul>
+
+<h2>Permissões do Usuário</h2>
+<ul>
+  <li>Fazer Login</li>
+  <li>Visualizar, Criar e Apagar Posts</li>
+  <li>Criar de 1 a 3 Tags ao criar Posts</li>
+  <li>Visualizar um Post Completo</li>
+  <li>Ir para a Página de Perfil do Usuário</li>
+  <li>Atualizar Nome e Email no Perfil do Usuário</li>
+  <li>Fazer Logout</li>
+</ul>
+
+<h2>Funcionalidades</h2>
+<ul>
   <li>Persistência dos dados de Usuário e de Autenticação</li>
-  <li>Atualizar Perfil do Usuário</li>
-  <li>Criar, Visualizar e Apagar Post</li>
-  <li>Visualizar Post Completo ao clicar em cima</li>
-  <li>Criar Tag em Post ao criar Post</li>
-  <li>Filtrar posts por Tags</li>
-  <li>Navegar entre as páginas (Cada página exibe 6 Posts)</li>
+  <li>Persistência da Página ao Sair da Página Home e Voltar</li>
+  <li>Paginação Dinâmica</li>
+  <li>Validação dos Formulários com Mensagens de Erros</li>
 </ul>
 
 ### Faça o Git Clone e faça o teste...
