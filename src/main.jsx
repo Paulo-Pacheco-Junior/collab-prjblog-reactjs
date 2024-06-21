@@ -6,16 +6,19 @@ import { GlobalStyle } from "./globalStyle";
 import { ThemeProvider } from "styled-components";
 import theme from "./themes/theme";
 import { UserContextProvider } from "./contexts/UserContext";
+import { PaginateContextProvider } from "./contexts/PaginateContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <UserContextProvider>
-        <HashRouter>
-          <AppRoutes />
-        </HashRouter>
-      </UserContextProvider>
+      <PaginateContextProvider>
+        <UserContextProvider>
+          <HashRouter>
+            <AppRoutes />
+          </HashRouter>
+        </UserContextProvider>
+      </PaginateContextProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

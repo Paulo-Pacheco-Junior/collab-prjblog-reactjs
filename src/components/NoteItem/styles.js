@@ -8,7 +8,7 @@ export const Container = styled.li`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_700};
   color: ${({ theme }) => theme.COLORS.GRAY_300};
   padding: 0.1rem 1.6rem 1.4rem;
-  height: 19rem;
+  height: 20rem;
   width: 30rem;
   border-radius: 1rem;
 

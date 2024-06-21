@@ -1,30 +1,32 @@
-import { Container, BlogContent, TagsBar, NewPostBtn } from "./styles";
+import { Container, BlogContent, /*TagsBar,*/ NewPostBtn } from "./styles";
 import api from "../../services/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
 import { Header } from "../../components/Header";
 // import { Input } from "../../components/Input";
 import { Paginate } from "../../components/Paginate";
+import { PaginateContext } from "../../contexts/PaginateContext";
 
 export function Home() {
-  const [posts, setPosts] = useState([]);
-  const [tags, setTags] = useState([]);
-  // const [search, setSearch] = useState("");
+  const { page, setPage } = useContext(PaginateContext);
 
-  const [page, setPage] = useState(1);
+  const [posts, setPosts] = useState([]);
   const [pages, setPages] = useState();
 
-  async function handleFilterTags(tagId) {
-    if (tagId === "all") {
-      const response = await api.get(`/posts?page=${page}`);
-      const { data } = response.data;
-      return setPosts(data);
-    }
+  // const [tags, setTags] = useState([]);
+  // const [search, setSearch] = useState("");
 
-    const filteredTags = tags.filter((tag) => tag.id === tagId);
+  // async function handleFilterTags(tagId) {
+  //   if (tagId === "all") {
+  //     const response = await api.get(`/posts?page=${page}`);
+  //     const { data } = response.data;
+  //     return setPosts(data);
+  //   }
 
-    setPosts(filteredTags);
-  }
+  //   const filteredTags = tags.filter((tag) => tag.id === tagId);
+
+  //   setPosts(filteredTags);
+  // }
 
   useEffect(() => {
     async function handleGetPosts() {
@@ -32,7 +34,7 @@ export function Home() {
       const { data, current_page, last_page } = response.data;
 
       setPosts(data);
-      setTags(data);
+      // setTags(data);
 
       setPage(current_page);
       setPages(last_page);
