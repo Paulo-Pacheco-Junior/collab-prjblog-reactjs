@@ -3,7 +3,7 @@ import api from "../../services/api";
 import { useContext, useEffect, useState } from "react";
 import { NoteItem } from "../../components/NoteItem";
 import { Header } from "../../components/Header";
-// import { Input } from "../../components/Input";
+import { Input } from "../../components/Input";
 import { Paginate } from "../../components/Paginate";
 import { PaginateContext } from "../../contexts/PaginateContext";
 
@@ -11,10 +11,11 @@ export function Home() {
   const { page, setPage } = useContext(PaginateContext);
 
   const [posts, setPosts] = useState([]);
+  const [search, setSearch] = useState("");
+
   const [pages, setPages] = useState();
 
   // const [tags, setTags] = useState([]);
-  // const [search, setSearch] = useState("");
 
   // async function handleFilterTags(tagId) {
   //   if (tagId === "all") {
@@ -31,18 +32,26 @@ export function Home() {
   useEffect(() => {
     async function handleGetPosts() {
       const response = await api.get(`/posts?page=${page}`);
-      const { data, current_page, last_page } = response.data;
+      const { data, current_page, last_page } = await response.data;
 
       setPosts(data);
-      // setTags(data);
-
       setPage(current_page);
       setPages(last_page);
-
-      return data;
+      // setTags(data);
     }
     handleGetPosts();
   }, [page, pages]);
+
+  useEffect(() => {
+    async function handleSearchInput() {
+      const response = await api.get(`/posts?search=${search}`);
+      const { data } = await response.data;
+
+      setPosts(data);
+      setPage(1);
+    }
+    handleSearchInput();
+  }, [search]);
 
   return (
     <Container>
@@ -68,13 +77,13 @@ export function Home() {
           </ul>
         </TagsBar> */}
         <main>
-          {/* <Input
+          <Input
             type="text"
-            placeholder="Buscar..."
+            placeholder="Buscar por título ou autor..."
             lightInput
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-          /> */}
+          />
           <ul>
             {posts.map((post) => {
               return <NoteItem key={String(post.id)} post={post} />;

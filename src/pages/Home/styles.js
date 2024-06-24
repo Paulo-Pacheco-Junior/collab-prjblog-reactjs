@@ -10,14 +10,19 @@ export const Container = styled.div`
   main {
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1rem 14rem;
+
+    > input {
+      width: 90%;
+    }
   }
 
   ul {
     flex: 1;
-    margin-top: 1.2rem;
+    margin-top: 4rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
