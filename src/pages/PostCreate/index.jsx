@@ -50,7 +50,7 @@ export function PostCreate() {
 
   function handleCreateTagButtonClick() {
     if (tagsList.length < 3) {
-      if (newTag !== "" && newTag.trim() !== "" && newTag.length >= 3) {
+      if (newTag !== "" && newTag.trim() !== "" && newTag.trim().length >= 3) {
         setTagsList((tagsList) => [...tagsList, newTag]);
         setNewTag("");
       }
@@ -62,7 +62,11 @@ export function PostCreate() {
       if (e.key === "Enter") {
         e.preventDefault();
 
-        if (newTag !== "" && newTag.trim() !== "" && newTag.length >= 3) {
+        if (
+          newTag !== "" &&
+          newTag.trim() !== "" &&
+          newTag.trim().length >= 3
+        ) {
           setTagsList((tagsList) => [...tagsList, newTag]);
           setNewTag("");
         }
@@ -76,11 +80,16 @@ export function PostCreate() {
   }
 
   async function handleSubmitCreatePost({ title, textContent }) {
+    const tagsListWithNewTag =
+      newTag !== "" && newTag.trim() !== "" && newTag.trim().length >= 3
+        ? [...tagsList, newTag]
+        : tagsList;
+
     await api.post("/posts", {
       user_id: user.id,
       title,
       content: textContent,
-      tags: newTag ? [...tagsList, newTag] : tagsList,
+      tags: tagsListWithNewTag,
     });
 
     navigate("/");
@@ -146,8 +155,11 @@ export function PostCreate() {
             </TagsContainer>
             <ErrorMsg>
               {isSubmitted &&
+                (newTag === "" ||
+                  newTag.trim() === "" ||
+                  newTag.trim().length < 3) &&
                 tagsList.length === 0 &&
-                "O campo tag é obrigatório"}
+                "o campo tag é obrigatório"}
             </ErrorMsg>
 
             <Button
