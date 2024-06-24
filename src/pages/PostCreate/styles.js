@@ -85,13 +85,12 @@ export const TagInput = styled.input`
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY_900};
   color: ${({ theme }) => theme.COLORS.GRAY_200};
   padding: 0 1.4rem;
-  outline: none;
   border: none;
-
+  outline: 1px solid ${({ theme }) => theme.COLORS.BG_GRAY_900};
   border-radius: 0.8rem;
 
   &&:read-only {
-    background-color: rgba(35, 33, 41, 0.7);
+    background-color: rgba(35, 33, 41, 0.65);
     color: ${({ theme }) => theme.COLORS.GRAY_300};
 
     &&:focus {

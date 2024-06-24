@@ -26,7 +26,7 @@ export function PostCreate() {
   const navigate = useNavigate();
 
   const [newTag, setNewTag] = useState("");
-  const [tagsList, setTagsList] = useState("");
+  const [tagsList, setTagsList] = useState([]);
 
   let schema = yup.object({
     title: yup
@@ -40,12 +40,6 @@ export function PostCreate() {
       .required("o campo conteúdo é obrigatório")
       .min(30, "o conteúdo deve ter no mínimo 30 caracteres")
       .max(1200, "o conteúdo deve ter no máximo 1.200 caracteres"),
-
-    // tags: yup
-    //   .string()
-    //   .required("o campo tag é obrigatório")
-    //   .min(3, "a tag deve ter no mínimo 3 caracteres")
-    //   .max(15, "a tag deve ter no máximo 15 caracteres"),
   });
 
   const {
@@ -77,31 +71,19 @@ export function PostCreate() {
   }
 
   function handleDeleteTagButtonClick(tagIndex) {
-    const filteredTagsList = tagsList.filter(
-      (tags, index) => index !== tagIndex
-    );
+    const filteredTagsList = tagsList.filter((_, index) => index !== tagIndex);
     setTagsList(filteredTagsList);
   }
 
   async function handleSubmitCreatePost({ title, textContent }) {
-    console.log("useForm req", title, textContent);
-    console.log("state req tagsList", tagsList);
+    await api.post("/posts", {
+      user_id: user.id,
+      title,
+      content: textContent,
+      tags: newTag ? [...tagsList, newTag] : tagsList,
+    });
 
-    if (tagsList.length > 0) {
-      const response = await api.post("/posts", {
-        user_id: user.id,
-        title,
-        content: textContent,
-        tags: tagsList,
-      });
-      console.log("response do submit", response);
-
-      const data = await response.data;
-
-      console.log("response data", data);
-
-      navigate("/");
-    }
+    navigate("/");
   }
 
   return (
@@ -135,9 +117,10 @@ export function PostCreate() {
                   placeholder="#hashtag ..."
                   onKeyDown={handleCreateTagEnterPress}
                   maxLength={10}
+                  disabled={tagsList.length >= 3}
                 />
                 <button type="button" onClick={handleCreateTagButtonClick}>
-                  <RiAddCircleLine size={20} />
+                  {tagsList.length >= 3 ? null : <RiAddCircleLine size={20} />}
                 </button>
               </TagInputWithButton>
 
