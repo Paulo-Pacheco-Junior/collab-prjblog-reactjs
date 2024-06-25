@@ -28,6 +28,10 @@ export const Container = styled.div`
     flex-wrap: wrap;
     list-style: none;
     gap: 4rem;
+
+    p {
+      color: ${({ theme }) => theme.COLORS.GRAY_200};
+    }
   }
 
   @media (max-width: 768px) {

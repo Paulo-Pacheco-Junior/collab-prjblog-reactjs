@@ -13,7 +13,7 @@ export function Home() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
 
-  const [pages, setPages] = useState();
+  const [pages, setPages] = useState(1);
 
   // const [tags, setTags] = useState([]);
 
@@ -31,27 +31,21 @@ export function Home() {
 
   useEffect(() => {
     async function handleGetPosts() {
-      const response = await api.get(`/posts?page=${page}`);
+      const response = await api.get(`/posts?search=${search}&page=${page}`);
       const { data, current_page, last_page } = await response.data;
 
-      setPosts(data);
-      setPage(current_page);
-      setPages(last_page);
-      // setTags(data);
+      if (search === "" || search.trim() === "") {
+        setPosts(data);
+        setPage(current_page);
+        setPages(last_page);
+      } else {
+        setPosts(data);
+        setPage(1);
+        setPages(1);
+      }
     }
     handleGetPosts();
-  }, [page, pages]);
-
-  useEffect(() => {
-    async function handleSearchInput() {
-      const response = await api.get(`/posts?search=${search}`);
-      const { data } = await response.data;
-
-      setPosts(data);
-      setPage(1);
-    }
-    handleSearchInput();
-  }, [search]);
+  }, [search, page]);
 
   return (
     <Container>
@@ -88,6 +82,10 @@ export function Home() {
             {posts.map((post) => {
               return <NoteItem key={String(post.id)} post={post} />;
             })}
+
+            {posts.length === 0 && (
+              <p>Nenhum resultado encontrado pela busca.</p>
+            )}
           </ul>
         </main>
       </BlogContent>
