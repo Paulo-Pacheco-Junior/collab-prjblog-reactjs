@@ -5,20 +5,20 @@ import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./globalStyle";
 import { ThemeProvider } from "styled-components";
 import theme from "./themes/theme";
-import { UserContextProvider } from "./contexts/UserContext";
-import { PaginateContextProvider } from "./contexts/PaginateContext";
+import { UserProvider } from "./contexts/UserContext";
+import { PaginateProvider } from "./contexts/PaginateContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <PaginateContextProvider>
-        <UserContextProvider>
+      <PaginateProvider>
+        <UserProvider>
           <HashRouter>
             <AppRoutes />
           </HashRouter>
-        </UserContextProvider>
-      </PaginateContextProvider>
+        </UserProvider>
+      </PaginateProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

@@ -25,8 +25,8 @@ export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User>({ name: "Visitante" });
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("@user") || '"');
-    const storedToken = JSON.parse(localStorage.getItem("@token") || '"');
+    const storedUser = JSON.parse(localStorage.getItem("@user") || "[]");
+    const storedToken = JSON.parse(localStorage.getItem("@token") || "[]");
 
     api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
 

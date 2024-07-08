@@ -8,6 +8,8 @@
 
 <h2>Tecnologias e Ferramentas</h2>
 <ul>
+  <li>ReactJs</li>
+  <li>TypeScript</li>
   <li>Context Api</li> 
   <li>LocalStorage</li>
   <li>Axios</li>
