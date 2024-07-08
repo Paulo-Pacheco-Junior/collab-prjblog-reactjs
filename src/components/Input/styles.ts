@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.input`
+interface ContainerProps {
+  $light?: boolean;
+}
+
+export const Container = styled.input<ContainerProps>`
   background-color: ${({ theme, $light }) =>
     $light ? theme.COLORS.BG_GRAY_700 : theme.COLORS.BG_GRAY_900};
   color: ${({ theme }) => theme.COLORS.GRAY_200};

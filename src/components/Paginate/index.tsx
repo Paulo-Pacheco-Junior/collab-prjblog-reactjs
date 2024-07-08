@@ -1,7 +1,13 @@
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { Container, PageIcon } from "./styles";
 
-export function Paginate({ page, pages, setPage }) {
+interface PaginateProps {
+  page: number;
+  pages: number;
+  setPage: (page: number) => void;
+}
+
+export function Paginate({ page, pages, setPage }: PaginateProps) {
   return (
     <Container>
       {pages > 1 && (
@@ -11,18 +17,11 @@ export function Paginate({ page, pages, setPage }) {
       )}
       {pages > 1 && (
         <div className="pages-container">
-          <PageIcon
-            onClick={() => setPage((page) => page - 1)}
-            disabled={page <= 1}
-          >
+          <PageIcon onClick={() => setPage(page - 1)} disabled={page <= 1}>
             <MdNavigateBefore size={15} />
           </PageIcon>
           <PageIcon>{page}</PageIcon>
-          <PageIcon
-            className="pagination-icon"
-            onClick={() => setPage((page) => page + 1)}
-            disabled={page === pages}
-          >
+          <PageIcon onClick={() => setPage(page + 1)} disabled={page === pages}>
             <MdNavigateNext size={15} />
           </PageIcon>
         </div>
