@@ -4,7 +4,7 @@
 
 #### Back End: https://github.com/fernando-fix/collab-prjBlog
 
-#### Em Desenvolvimento...
+#### Em Desenvolvimento... IMPLEMENTANDO O TYPESCRIPT...
 
 <h2>Tecnologias e Ferramentas</h2>
 <ul>
