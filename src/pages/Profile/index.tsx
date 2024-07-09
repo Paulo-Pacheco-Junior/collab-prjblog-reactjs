@@ -10,6 +10,19 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+interface UpdateData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+interface ApiResponse {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export function Profile() {
   const { user, setUser } = useContext(UserContext);
 
@@ -30,12 +43,17 @@ export function Profile() {
       .string()
       .required("o campo senha é obrigatório")
       .min(6, "a senha deve ter no mínimo 6 caracteres"),
+
+    confirmPassword: yup
+      .string()
+      .required("o campo senha é obrigatório")
+      .min(6, "a senha deve ter no mínimo 6 caracteres"),
   });
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitted },
   } = useForm({
     defaultValues: {
       name: user.name,
@@ -45,11 +63,17 @@ export function Profile() {
     resolver: yupResolver(schema),
   });
 
-  async function handleUpdateData({ name, email, password }) {
-    const response = await api.put(`/users/${user.id}`, {
+  async function handleUpdateData({
+    name,
+    email,
+    password,
+    confirmPassword,
+  }: UpdateData) {
+    const response = await api.put<ApiResponse>(`/users/${user.id}`, {
       name,
       email,
       password,
+      password_confirmation: confirmPassword,
     });
 
     const data = await response.data;
@@ -59,8 +83,6 @@ export function Profile() {
     setUser(data);
 
     navigate("/");
-
-    return data;
   }
 
   return (
@@ -84,11 +106,22 @@ export function Profile() {
           />
           <ErrorMsg>{errors.password && errors.password?.message}</ErrorMsg>
 
+          <Input
+            type="password"
+            placeholder="Confirmar Senha"
+            {...register("confirmPassword")}
+          />
+          <ErrorMsg>
+            {errors.confirmPassword && errors.confirmPassword?.message}
+          </ErrorMsg>
+
           <Button
             type="submit"
             disabled={isSubmitting}
             title={isSubmitting ? "Carregando..." : "Atualizar Dados"}
           />
+
+          <ErrorMsg>{isSubmitted && "o e-mail informado já existe"}</ErrorMsg>
 
           <LinkBtn to="/" title="voltar" />
         </Form>

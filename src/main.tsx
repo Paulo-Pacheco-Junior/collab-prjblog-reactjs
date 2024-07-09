@@ -8,7 +8,7 @@ import theme from "./themes/theme";
 import { UserProvider } from "./contexts/UserContext";
 import { PaginateProvider } from "./contexts/PaginateContext";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />

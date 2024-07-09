@@ -11,6 +11,22 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface ApiResponse {
+  user: User;
+  token: string;
+}
+
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 export function SignIn() {
   const { setUser } = useContext(UserContext);
 
@@ -34,8 +50,8 @@ export function SignIn() {
     formState: { errors, isSubmitting, isSubmitted },
   } = useForm({ resolver: yupResolver(schema) });
 
-  async function handleLogin({ email, password }) {
-    const response = await api.post("/login", {
+  async function handleLogin({ email, password }: LoginData) {
+    const response = await api.post<ApiResponse>("/login", {
       email,
       password,
     });
@@ -50,8 +66,6 @@ export function SignIn() {
     setUser(user);
 
     navigate("/");
-
-    return user;
   }
 
   return (

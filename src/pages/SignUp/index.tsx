@@ -9,6 +9,19 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+interface ApiResponse {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export function SignUp() {
   const navigate = useNavigate();
 
@@ -27,6 +40,11 @@ export function SignUp() {
       .string()
       .required("o campo senha é obrigatório")
       .min(6, "a senha deve ter no mínimo 6 caracteres"),
+
+    confirmPassword: yup
+      .string()
+      .required("o campo senha é obrigatório")
+      .min(6, "a senha deve ter no mínimo 6 caracteres"),
   });
 
   const {
@@ -35,18 +53,20 @@ export function SignUp() {
     formState: { errors, isSubmitting, isSubmitted },
   } = useForm({ resolver: yupResolver(schema) });
 
-  async function handleRegister({ name, email, password }) {
-    const response = await api.post("/users", {
+  async function handleRegister({
+    name,
+    email,
+    password,
+    confirmPassword,
+  }: RegisterData) {
+    await api.post<ApiResponse>("/users", {
       name,
       email,
       password,
+      password_confirmation: confirmPassword,
     });
 
-    const data = await response.data;
-
     navigate("/login");
-
-    return data;
   }
 
   return (
@@ -70,6 +90,15 @@ export function SignUp() {
             {...register("password")}
           />
           <ErrorMsg>{errors.password && errors.password?.message}</ErrorMsg>
+
+          <Input
+            type="password"
+            placeholder="Confirmar Senha"
+            {...register("confirmPassword")}
+          />
+          <ErrorMsg>
+            {errors.confirmPassword && errors.confirmPassword?.message}
+          </ErrorMsg>
 
           <Button
             type="submit"
