@@ -7,10 +7,33 @@ import { Input } from "../../components/Input";
 import { Paginate } from "../../components/Paginate";
 import { PaginateContext } from "../../contexts/PaginateContext";
 
+interface User {
+  name: string;
+}
+
+interface Tags {
+  id: number;
+  name: string;
+}
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  user: User;
+  tags: Tags[];
+}
+
+interface ApiResponse {
+  data: Post[];
+  current_page: number;
+  last_page: number;
+}
+
 export function Home() {
   const { page, setPage } = useContext(PaginateContext);
 
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [search, setSearch] = useState("");
 
   const [pages, setPages] = useState(1);
@@ -31,7 +54,9 @@ export function Home() {
 
   useEffect(() => {
     async function handleGetPosts() {
-      const response = await api.get(`/posts?search=${search}&page=${page}`);
+      const response = await api.get<ApiResponse>(
+        `/posts?search=${search}&page=${page}`
+      );
       const { data, current_page, last_page } = await response.data;
 
       if (search === "" || search.trim() === "") {

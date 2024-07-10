@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, KeyboardEvent } from "react";
 import { MdOutlineRemoveCircleOutline } from "react-icons/md";
 import { RiAddCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -20,13 +20,34 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+interface User {
+  name: string;
+}
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  user: User;
+  tags: string[];
+}
+
+interface ApiResponse {
+  post: Post;
+}
+
+interface SubmitCreatePostData {
+  title: string;
+  textContent: string;
+}
+
 export function PostCreate() {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const [newTag, setNewTag] = useState("");
-  const [tagsList, setTagsList] = useState([]);
+  const [newTag, setNewTag] = useState<string>("");
+  const [tagsList, setTagsList] = useState<string[]>([]);
 
   let schema = yup.object({
     title: yup
@@ -57,7 +78,7 @@ export function PostCreate() {
     }
   }
 
-  function handleCreateTagEnterPress(e) {
+  function handleCreateTagEnterPress(e: KeyboardEvent<HTMLInputElement>) {
     if (tagsList.length < 3) {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -74,18 +95,21 @@ export function PostCreate() {
     }
   }
 
-  function handleDeleteTagButtonClick(tagIndex) {
+  function handleDeleteTagButtonClick(tagIndex: number) {
     const filteredTagsList = tagsList.filter((_, index) => index !== tagIndex);
     setTagsList(filteredTagsList);
   }
 
-  async function handleSubmitCreatePost({ title, textContent }) {
+  async function handleSubmitCreatePost({
+    title,
+    textContent,
+  }: SubmitCreatePostData) {
     const tagsListWithNewTag =
       newTag !== "" && newTag.trim() !== "" && newTag.trim().length >= 3
         ? [...tagsList, newTag]
         : tagsList;
 
-    await api.post("/posts", {
+    await api.post<ApiResponse>("/posts", {
       user_id: user.id,
       title,
       content: textContent,

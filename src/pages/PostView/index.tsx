@@ -5,12 +5,27 @@ import api from "../../services/api";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
+interface User {
+  name: string;
+}
+
+interface Post {
+  user_id: number;
+  title: string;
+  content?: string;
+  user: User;
+}
+
+interface ApiResponse {
+  post: Post;
+}
+
 export function PostView() {
   const { user } = useContext(UserContext);
 
   let { postId } = useParams();
 
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<Post | null>(null);
 
   async function handleDeletePost() {
     if (confirm("Tem certeza que deseja excluir?")) {
@@ -20,7 +35,7 @@ export function PostView() {
 
   useEffect(() => {
     async function getPost() {
-      const response = await api.get(`/posts/${postId}`);
+      const response = await api.get<ApiResponse>(`/posts/${postId}`);
       const { post } = response.data;
 
       setPost(post);
@@ -34,17 +49,17 @@ export function PostView() {
         <div className="buttons-div">
           <LinkBtn to="/" title="Voltar" />
 
-          {user.id === post.user_id && (
+          {user.id === post?.user_id && (
             <LinkBtn to="/" onClick={handleDeletePost} title="Apagar Post" />
           )}
         </div>
         <Post>
-          <h1>{post.title}</h1>
+          <h1>{post?.title}</h1>
           <Scroll>
-            <p>{post.content}</p>
+            <p>{post?.content}</p>
           </Scroll>
           <footer>
-            <span>{post.user?.name}</span>
+            <span>{post?.user?.name}</span>
           </footer>
         </Post>
       </div>
