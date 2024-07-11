@@ -116,7 +116,7 @@ export function PostCreate() {
       tags: tagsListWithNewTag,
     });
 
-    navigate("/");
+    navigate(-1);
   }
 
   return (

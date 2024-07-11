@@ -13,9 +13,11 @@ export function Header() {
   async function handleLogout() {
     setUser({ name: "Visitante" });
 
+    await api.post("/logout");
+
     localStorage.clear();
 
-    await api.post("/logout");
+    delete api.defaults.headers.common["Authorization"];
   }
 
   return (

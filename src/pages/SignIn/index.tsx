@@ -7,6 +7,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { LinkBtn } from "../../components/LinkBtn";
 import { UserContext } from "../../contexts/UserContext";
+import { PaginateContext } from "../../contexts/PaginateContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -29,6 +30,7 @@ interface LoginData {
 
 export function SignIn() {
   const { setUser } = useContext(UserContext);
+  const { setPage } = useContext(PaginateContext);
 
   const navigate = useNavigate();
 
@@ -64,6 +66,7 @@ export function SignIn() {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     setUser(user);
+    setPage(1);
 
     navigate("/");
   }

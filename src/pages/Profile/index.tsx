@@ -82,7 +82,7 @@ export function Profile() {
 
     setUser(data);
 
-    navigate("/");
+    navigate(-1);
   }
 
   return (
@@ -121,7 +121,9 @@ export function Profile() {
             title={isSubmitting ? "Carregando..." : "Atualizar Dados"}
           />
 
-          <ErrorMsg>{isSubmitted && "o e-mail informado já existe"}</ErrorMsg>
+          <ErrorMsg>
+            {isSubmitted && "o e-mail já existe ou senha inválida"}
+          </ErrorMsg>
 
           <LinkBtn to="/" title="voltar" />
         </Form>

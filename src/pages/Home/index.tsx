@@ -6,6 +6,7 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Paginate } from "../../components/Paginate";
 import { PaginateContext } from "../../contexts/PaginateContext";
+import { useSearchParams } from "react-router-dom";
 
 interface User {
   name: string;
@@ -31,6 +32,8 @@ interface ApiResponse {
 }
 
 export function Home() {
+  let [searchParams, setSearchParams] = useSearchParams();
+
   const { page, setPage } = useContext(PaginateContext);
 
   const [posts, setPosts] = useState<Post[]>([]);
@@ -52,6 +55,19 @@ export function Home() {
   //   setPosts(filteredTags);
   // }
 
+  function handleSetParams() {
+    searchParams = new URLSearchParams();
+
+    searchParams.set("search", search);
+    searchParams.set("page", String(page));
+
+    if (search === "") {
+      searchParams.delete("search");
+    }
+
+    setSearchParams(searchParams);
+  }
+
   useEffect(() => {
     async function handleGetPosts() {
       const response = await api.get<ApiResponse>(
@@ -70,6 +86,7 @@ export function Home() {
       }
     }
     handleGetPosts();
+    handleSetParams();
   }, [search, page]);
 
   return (
